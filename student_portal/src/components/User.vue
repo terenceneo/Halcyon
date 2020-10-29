@@ -1,10 +1,13 @@
 <template>
-	<div id="user">
-		<AppHeader></AppHeader>
-		<AppNav></AppNav>	
-		<h2>I am the user page</h2>
+	<div id="user-container">
+		<AppHeader v-bind:user="$route.params.id"></AppHeader>
+		<AppNav v-bind:user="$route.params.id"></AppNav>
+		
+		<h1>User "{{ $route.params.id }}"</h1>
 		<p>This is a container component that performs a one-time update for headers and whatnot with user information upon a successful login.</p>
-		<AppFooter></AppFooter>	
+		
+		<router-view v-bind:user="$route.params.id"></router-view>
+		<AppFooter v-bind:user="$route.params.id"></AppFooter>	
 	</div>
 </template>
 

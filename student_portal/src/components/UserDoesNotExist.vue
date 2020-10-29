@@ -24,4 +24,8 @@ export default {
 </script>
 
 <style lang="css" scoped>
+#userDoesNotExist {
+	margin: 5px;
+	border: solid black 1px;
+}
 </style>
