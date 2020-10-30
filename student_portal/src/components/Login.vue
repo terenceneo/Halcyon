@@ -39,13 +39,14 @@ export default {
 				.where('password', '==', password)
 				.limit(1)
 				.get()
-				.then(function(querySnapshot) {
+				.then(querySnapshot => {
 					if (querySnapshot.size == 1) {
-						querySnapshot.forEach(function(doc) {
+						querySnapshot.forEach(doc => {
 							router.push({path: '/user/'+doc.id+'/home'})
 						});
 					} else {
 						// Handle invalid login here
+						console.log('invalid credentials? ', username, ' and ', password);
 					}
 				})
 			return

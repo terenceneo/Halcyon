@@ -40,7 +40,7 @@ export default {
 				.then(querySnapshot => {
 					if (querySnapshot.size == 0) {
 						// Register new user
-						database.collection("auth").add({
+						database.collection("user").add({
 							username,
 							password,
 						})
