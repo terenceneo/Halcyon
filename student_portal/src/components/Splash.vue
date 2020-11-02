@@ -1,7 +1,8 @@
 <template>
 	<div id="splash">
-		<AppHeader></AppHeader>
 		<AppNav></AppNav>	
+		<AppHeader></AppHeader>
+		
 		<h2>I am the splash page</h2>	
 		<AppFooter></AppFooter>	
 	</div>
