@@ -1,7 +1,7 @@
 <template>
 	<div id="user-container">
-		<AppHeader v-bind:user="$route.params.id"></AppHeader>
 		<AppNav v-bind:user="$route.params.id"></AppNav>
+		<AppHeader v-bind:user="$route.params.id"></AppHeader>
 		
 		<h1>User "{{ $route.params.id }}"</h1>
 		<p>This is a container component that performs a one-time update for headers and whatnot with user information upon a successful login.</p>
@@ -12,15 +12,15 @@
 </template>
 
 <script>
-import AppHeader from './app/Header.vue'
 import AppNav from './app/Nav.vue'
+import AppHeader from './app/Header.vue'
 import AppFooter from './app/Footer.vue'
 
 export default {
 	name: 'User',
 	components: {
-		AppHeader,
 		AppNav,
+		AppHeader,
 		AppFooter,
 	}
 }

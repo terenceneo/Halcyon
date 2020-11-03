@@ -3,11 +3,19 @@
 		<h1>Nav bar???</h1>
 		<p v-if="user">User "{{ user }}" is logged in.</p>
 		<p>This is just a dummy component to confirm that routing works. This should later be removed and router links should be incorporated into individual page components. Maybe consider putting routing in the header? Then the available links in each page component can be toggled based on props passed by the components</p>
-		<router-link to="/login">Login</router-link>
-		<br>
-		<router-link to="/register">Register</router-link>
-		<br>
-		<router-link to="/user">User</router-link>
+		
+		<ul class="nav justify-content-end">
+			<li class="nav-item">
+				<router-link to="/login">Login</router-link>
+			</li>
+			<li class="nav-item">
+				<router-link to="/register">Register</router-link>
+			</li>
+			<li class="nav-item">
+				<router-link to="/user">User</router-link>
+			</li>
+
+		</ul>
 	</div>
 </template>
 
@@ -20,8 +28,16 @@ export default {
 </script>
 
 <style lang="css" scoped>
+@import url("https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js");
+@import url("https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js");
+@import url("https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js");
+@import url("https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css");
 #appNav {
-	margin: 5px;
-	border: solid black 1px;
+
+}
+
+li {
+	padding-right: 10px;
+	margin: 10px 0;
 }
 </style>
