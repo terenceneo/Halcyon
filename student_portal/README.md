@@ -1,4 +1,6 @@
-# student_portal ![Deploy to Firebase Hosting on PR](https://github.com/terenceneo/Halcyon/workflows/Deploy%20to%20Firebase%20Hosting%20on%20PR/badge.svg)
+# student_portal
+![Live channel](https://github.com/terenceneo/Halcyon/workflows/Deploy%20to%20Firebase%20Hosting%20on%20merge/badge.svg)
+![Preview channel](https://github.com/terenceneo/Halcyon/workflows/Deploy%20to%20Firebase%20Hosting%20on%20PR/badge.svg)
 
 ## Project setup
 ```
