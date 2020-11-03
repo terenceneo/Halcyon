@@ -1,7 +1,7 @@
 <template>
 	<div id="userDoesNotExist">
+		<AppNav></AppNav>	
 		<AppHeader></AppHeader>
-		<AppNav></AppNav>
 		<h2>I am an error page</h2>
 		<p>This is a catch all error page to redirect to when people mess with the url. Normal users will access content through "/user/document_id"</p>
 		<AppFooter></AppFooter>
@@ -9,15 +9,15 @@
 </template>
 
 <script>
-import AppHeader from './app/Header.vue'
 import AppNav from './app/Nav.vue'
+import AppHeader from './app/Header.vue'
 import AppFooter from './app/Footer.vue'
 
 export default {
 	name: 'UserDoesNotExist',
 	components: {
-		AppHeader,
 		AppNav,
+		AppHeader,
 		AppFooter,
 	}
 }
