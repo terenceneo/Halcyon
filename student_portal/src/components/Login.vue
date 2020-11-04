@@ -1,7 +1,7 @@
 <template>
 	<div id="login">
+		<AppNav></AppNav>	
 		<AppHeader></AppHeader>
-		<AppNav></AppNav>
 		<h2>I am the login page</h2>
 		<label>Username</label><input type="text" name="user" v-model="username"><br>
 		<label>Password</label><input type="text" name="pass" v-model="password"><br>
@@ -11,16 +11,16 @@
 </template>
 
 <script>
-import AppHeader from './app/Header.vue'
 import AppNav from './app/Nav.vue'
+import AppHeader from './app/Header.vue'
 import AppFooter from './app/Footer.vue'
 import database from '../firebase.js'
 
 export default {
 	name: 'Login',
 	components: {
-		AppHeader,
 		AppNav,
+		AppHeader,
 		AppFooter,
 	},
 	data: function() {

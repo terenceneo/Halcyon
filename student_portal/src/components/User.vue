@@ -6,6 +6,21 @@
 		<h1>User "{{ $route.params.id }}"</h1>
 		<p>This is a container component that performs a one-time update for headers and whatnot with user information upon a successful login.</p>
 		
+		<ul class="nav justify-content-end">
+			<li class="nav-item">
+				<router-link to="home">Home</router-link>
+			</li>
+			<li class="nav-item">
+				<router-link to="calendar">Calendar</router-link>
+			</li>
+			<li class="nav-item">
+				<router-link to="modules">Modules</router-link>
+			</li>
+			<li class="nav-item">
+				<router-link to="studygroup">Study Groups</router-link>
+			</li>
+		</ul>
+
 		<router-view v-bind:user="$route.params.id"></router-view>
 		<AppFooter v-bind:user="$route.params.id"></AppFooter>	
 	</div>
@@ -27,4 +42,8 @@ export default {
 </script>
 
 <style lang="css" scoped>
+li {
+	padding-right: 10px;
+	margin: 10px 0;
+}
 </style>

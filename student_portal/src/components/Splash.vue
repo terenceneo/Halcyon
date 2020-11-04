@@ -9,15 +9,15 @@
 </template>
 
 <script>
-import AppHeader from './app/Header.vue'
 import AppNav from './app/Nav.vue'
+import AppHeader from './app/Header.vue'
 import AppFooter from './app/Footer.vue'
 
 export default {
 	name: 'Splash',
 	components: {
-		AppHeader,
 		AppNav,
+		AppHeader,
 		AppFooter,
 	}
 }
