@@ -1,14 +1,13 @@
 <template>
-	<div id='modules'>
-		<h1>List of Modules</h1>
-		
-		<p>User {{ user }} is logged in.</p>
+	<div id='mentalWellbeing'>
+		<h1>Time for a break</h1>
+		<p>User "{{ user }}" is logged in.</p>
 	</div>
 </template>
 
 <script>
 export default {
-	name: 'Modules',
+	name: 'mentalWellbeing',
 	props: ['user'],
 	components: {},
 }
