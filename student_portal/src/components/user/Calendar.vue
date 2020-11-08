@@ -1,7 +1,6 @@
 <template>
 	<div id='calendar'>
-		<h1>I am a calendar</h1>
-		<p>User "{{ user }}" is logged in.</p>
+		<h1>Upcoming Classes</h1>
 			<div class="agenda">
 			<div class="table-responsive">
 				<table class="table table-condensed table-bordered">
