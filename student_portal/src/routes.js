@@ -7,6 +7,8 @@ import Home from './components/user/Home.vue'
 import Calendar from './components/user/Calendar.vue'
 import Modules from './components/user/Modules.vue'
 import StudyGroup from './components/user/StudyGroup.vue'
+import StudyProgress from './components/user/StudyProgress.vue'
+import MentalWellbeing from './components/user/MentalWellbeing.vue'
 
 const routes = [
 	{path: '', component: Splash},
@@ -26,6 +28,8 @@ const routes = [
 			{path: 'calendar', component: Calendar},
 			{path: 'modules', component: Modules},
 			{path: 'studygroup', component: StudyGroup},
+			{path: 'mentalwellbeing', component: MentalWellbeing},
+			{path: 'studyprogress', component: StudyProgress}
 		],
 	},
 ]

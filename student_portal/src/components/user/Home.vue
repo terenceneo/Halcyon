@@ -35,4 +35,5 @@ export default {
 	margin: 5px;
 	border: solid black 1px;
 }
+
 </style>

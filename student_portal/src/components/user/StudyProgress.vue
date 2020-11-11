@@ -1,5 +1,5 @@
 <template>
-	<div id='home'>
+	<div id='studyProgress'>
 		<h1>I am a study progress page.</h1>
 		<p>User "{{ user }}" is logged in.</p>
 		{{ timerCount }}
@@ -9,7 +9,7 @@
 
 <script>
     export default {
-		name: 'Home',
+		name: 'mentalWellbeing',
 		props: ['user'],
 		components: {},
         data() {
@@ -37,4 +37,3 @@
 	margin: 5px;
 	border: solid black 1px;
 }
-</style>
