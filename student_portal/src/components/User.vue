@@ -49,7 +49,7 @@ export default {
 }
 </script>
 
-<style lang="css" scoped>
+<style lang="css" scoped> 
 li {
 	padding-right: 10px;
 	margin: 10px 0;
