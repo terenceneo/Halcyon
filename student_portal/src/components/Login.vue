@@ -2,10 +2,10 @@
 	<div id="login">
 		<AppNav></AppNav>	
 		<AppHeader></AppHeader>
-		<h2>I am the login page</h2>
-		<label>Username</label><input type="text" name="user" v-model="username"><br>
-		<label>Password</label><input type="text" name="pass" v-model="password"><br>
-		<button v-on:click="login(username, password)">Log in</button>
+		<h2>Login with your credentials</h2>
+		<label>Username</label> <input type="text" name="user" v-model="username"><br>
+		<label>Password</label> <input type="text" name="pass" v-model="password"><br>
+		<button v-on:click="login(username, password)">Login</button>
 		<AppFooter></AppFooter>	
 	</div>
 </template>

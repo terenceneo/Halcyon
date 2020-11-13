@@ -6,9 +6,9 @@
 			<p class="lead">Changing the way students work from home.</p>
 			<hr class="my-4">
 			<div style="text-align: center">
-			<a class="btn btn-primary btn-lg" href="#" role="button">Log In</a>
+			<a class="btn btn-primary btn-lg" href="/login" role="button">Log In</a>
 			<div class="divider"/>
-			<a class="btn btn-primary btn-lg" href="#" role="button">Register Now</a>
+			<a class="btn btn-primary btn-lg" href="/register" role="button">Register Now</a>
 			</div>
 		</div>
 	</div>

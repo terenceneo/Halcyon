@@ -1,15 +1,15 @@
 <template>
 	<div id='home'>
-		<h1>I am a home page</h1>
+		<h1>Home Page</h1>
 		<p>User "{{ user }}" is logged in.</p>
 		<div>
 			<h2>Alerts</h2>
-			<ul class="list-group">
-				<li class="list-group-item">Cras justo odio</li>
-				<li class="list-group-item">Dapibus ac facilisis in</li>
-				<li class="list-group-item">Morbi leo risus</li>
-				<li class="list-group-item">Porta ac consectetur ac</li>
-				<li class="list-group-item">Vestibulum at eros</li>
+			<ul class="list-group list-group-flush">
+				<li class="list-group-item disabled">1pm - BT3101 Lecture </li>
+				<li class="list-group-item active">3pm - CS3245 Lecture</li>
+				<li class="list-group-item">5pm - CS4231 Tutorial</li>
+				<li class="list-group-item">GES1010 Assignment 1 Due</li>
+				<li class="list-group-item">DBA 2705 Assignment 2 Due</li>
 			</ul>
 		</div>
 		<div>

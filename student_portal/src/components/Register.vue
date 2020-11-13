@@ -2,9 +2,9 @@
 	<div id="register">
 		<AppNav></AppNav>	
 		<AppHeader></AppHeader>
-		<h2>I am the registration page</h2>	
-		<label>Username</label><input type="text" name="user" v-model="username"><br>
-		<label>Password</label><input type="text" name="pass" v-model="password"><br>
+		<h2>Register now!</h2>	
+		<label>Username</label> <input type="text" name="user" v-model="username"><br>
+		<label>Password</label> <input type="text" name="pass" v-model="password"><br>
 		<button v-on:click="register(username, password)">Register</button>
 		<AppFooter></AppFooter>	
 	</div>
