@@ -26,7 +26,7 @@ export default {
 
 <style lang="css" scoped>
 img {
-	padding-right: 100px;
+	padding: 0px 50px;
 	margin: 10px 0;
 }
 </style>
