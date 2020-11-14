@@ -1,10 +1,30 @@
 <template>
 	<div id="login">
 		<AppHeader show-image=True></AppHeader>
-		<h2>Login with your credentials</h2>
-		<label>Username</label> <input type="text" name="user" v-model="username"><br>
-		<label>Password</label> <input type="text" name="pass" v-model="password"><br>
-		<button v-on:click="login(username, password)">Login</button>
+				
+		<div class="row">
+		<div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+		<div class="card card-signin my-5">
+		<div class="card-body">
+			<h5 class="card-title text-center">Sign In</h5>
+			<form class="form-signin" v-on:submit.prevent="login(username, password)">
+				<div class="form-label-group">
+					<label for="user">Username</label>
+					<input type="text" id="user" class="form-control" v-bind="username" required autofocus>
+				</div>
+				<br>
+				<div class="form-label-group">
+					<label for="pass">Password</label>
+					<input type="password" id="pass" class="form-control" v-bind="password" required>
+				</div>
+				<br>
+				<button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Sign in</button>
+			</form>
+		</div>
+		</div>
+		</div>
+		</div>
+
 		<AppFooter></AppFooter>	
 	</div>
 </template>
