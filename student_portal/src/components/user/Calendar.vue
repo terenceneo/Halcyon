@@ -76,7 +76,7 @@
 <script>
 export default {
 	name: 'Calendar',
-	props: ['user'],
+	props: ['user', 'username', 'moduleList'],
 	components: {},
 }
 </script>

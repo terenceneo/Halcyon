@@ -3,8 +3,7 @@
 
 		<div class="row">
 		<div class="col-sm-9 col-md-7 col-lg-5 	mx-auto">
-		<h1>My Modules</h1>
-
+		<h1>My Modules {{ username }}</h1>
 		<form v-on:submit.prevent="addModule(moduleCode)">
 			<input type="text" id="module" class="form-control" v-model="moduleCode">
 			<br>
@@ -12,9 +11,9 @@
 		</form>
 
 		<ul class="list-group list-group-flush">
-			<li class="list-group-item" v-for="(data, moduleCode) in moduleList" :key="moduleCode">
-				<span>{{ data.moduleCode }} - {{ data.title }}</span>
-				<button class="btn btn-primary" v-on:click="removeModule(data.moduleCode)">Remove</button>
+			<li class="list-group-item" v-for="module in moduleList" :key="module.moduleCode">
+				<span>{{ module.moduleCode }} - {{ module.title }}</span>
+				<button class="btn btn-primary" v-on:click="removeModule(module.moduleCode)">Remove</button>
 			</li>
 		</ul>
 		</div>
@@ -30,12 +29,11 @@ import db from '../../firebase.js'
 
 export default {
 	name: 'Modules',
-	props: ['user'],
+	props: ['user', 'username', 'moduleList'],
 	components: {},
 	data: function() {
 		return {
 			moduleCode: null,
-			moduleList: [],
 		}
 	},
 	methods: {
@@ -64,12 +62,6 @@ export default {
 			db.collection('users').doc(this.user).update({modules: this.moduleList});
 			return
 		},
-	},
-	mounted: function() {
-		db.collection('users').doc(this.user).get().then(doc => {
-			this.moduleList = doc.data().modules;
-		});
-		return
 	},
 }
 </script>
