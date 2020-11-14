@@ -18,7 +18,7 @@
 					<input type="password" id="pass" class="form-control" v-model="password" required>
 				</div>
 				<br>
-				<button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Sign in</button>
+				<button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Register</button>
 			</form>
 		</div>
 		</div>
@@ -60,6 +60,7 @@ export default {
 						database.collection("user").add({
 							username,
 							password,
+							modules: [],
 						})
 						.then(function(docRef) {
 							router.push({path: '/user/'+docRef.id+'/home'});
