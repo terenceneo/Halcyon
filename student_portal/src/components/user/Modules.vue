@@ -1,25 +1,25 @@
 <template>
 	<div id='modules'>
-
 		<div class="row">
-		<div class="col-sm-9 col-md-7 col-lg-5 	mx-auto">
-		<h1>My Modules {{ username }}</h1>
-		<form v-on:submit.prevent="addModule(moduleCode)">
-			<input type="text" id="module" class="form-control" v-model="moduleCode">
-			<br>
-			<button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Add Module</button>
-		</form>
+			<div class="col-sm-9 col-md-7 col-lg-5 	mx-auto">
+			
+				<h1>My Modules {{ username }}</h1>
+				
+				<form v-on:submit.prevent="addModule(moduleCode)">
+					<input type="text" id="module" class="form-control" v-model="moduleCode">
+					<br>
+					<button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Add Module</button>
+				</form>
 
-		<ul class="list-group list-group-flush">
-			<li class="list-group-item" v-for="module in moduleList" :key="module.moduleCode">
-				<span>{{ module.moduleCode }} - {{ module.title }}</span>
-				<button class="btn btn-primary" v-on:click="removeModule(module.moduleCode)">Remove</button>
-			</li>
-		</ul>
+				<ul class="list-group list-group-flush">
+					<li class="list-group-item" v-for="module in moduleList" :key="module.moduleCode">
+						<span>{{ module.moduleCode }} - {{ module.title }}</span>
+						<button class="btn btn-primary" v-on:click="removeModule(module.moduleCode)">Remove</button>
+					</li>
+				</ul>
+			
+			</div>
 		</div>
-		</div>
-
-		
 	</div>
 </template>
 
