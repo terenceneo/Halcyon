@@ -10,21 +10,21 @@
 			<form class="form-signin" v-on:submit.prevent="register(username, password)">
 				<div class="form-label-group">
 					<label for="user">Username</label>
-					<input type="text" id="user" class="form-control" v-bind="username" required autofocus>
+					<input type="text" id="user" class="form-control" v-model="username" required autofocus>
 				</div>
 				<br>
 				<div class="form-label-group">
 					<label for="pass">Password</label>
-					<input type="password" id="pass" class="form-control" v-bind="password" required>
+					<input type="password" id="pass" class="form-control" v-model="password" required>
 				</div>
 				<br>
-				<button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Sign in</button>
+				<button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Register</button>
 			</form>
 		</div>
 		</div>
 		</div>
 		</div>
-		
+
 		<AppFooter></AppFooter>	
 	</div>
 </template>
@@ -60,6 +60,7 @@ export default {
 						database.collection("user").add({
 							username,
 							password,
+							modules: [],
 						})
 						.then(function(docRef) {
 							router.push({path: '/user/'+docRef.id+'/home'});

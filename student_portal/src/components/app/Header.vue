@@ -8,7 +8,7 @@
 				v-if="showImage"
 				v-img :src="require('@/assets/graduation.png')" 
 				width="250"
-			>
+			/>
 			<!-- <hr class="my-4">
 				<div style="text-align: center">
 				<router-link class="btn btn-primary btn-lg" to="/login" role="button">Log In</router-link>
