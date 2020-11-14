@@ -1,7 +1,6 @@
 <template>
 	<div id="login">
-		<AppNav></AppNav>	
-		<AppHeader></AppHeader>
+		<AppHeader show-image=True></AppHeader>
 		<h2>Login with your credentials</h2>
 		<label>Username</label> <input type="text" name="user" v-model="username"><br>
 		<label>Password</label> <input type="text" name="pass" v-model="password"><br>
@@ -11,7 +10,6 @@
 </template>
 
 <script>
-import AppNav from './app/Nav.vue'
 import AppHeader from './app/Header.vue'
 import AppFooter from './app/Footer.vue'
 import database from '../firebase.js'
@@ -19,7 +17,6 @@ import database from '../firebase.js'
 export default {
 	name: 'Login',
 	components: {
-		AppNav,
 		AppHeader,
 		AppFooter,
 	},

@@ -1,6 +1,5 @@
 <template>
 	<div id="user-container">
-		<AppNav v-bind:user="$route.params.id"></AppNav>
 		<AppHeader v-bind:user="$route.params.id"></AppHeader>
 		
 		<h1> Welcome {{ $route.params.id }} !</h1>
@@ -35,14 +34,12 @@
 </template>
 
 <script>
-import AppNav from './app/Nav.vue'
 import AppHeader from './app/Header.vue'
 import AppFooter from './app/Footer.vue'
 
 export default {
 	name: 'User',
 	components: {
-		AppNav,
 		AppHeader,
 		AppFooter,
 	}

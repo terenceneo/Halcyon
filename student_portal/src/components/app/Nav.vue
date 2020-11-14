@@ -1,17 +1,17 @@
 <template>
 	<div id='appNav'>
-		<p v-if="user">User "{{ user }}" is logged in.</p>
-		<ul class="nav justify-content-end">
+		<ul v-if="user" class="nav justify-content-end">
+			<li class="nav-item">
+				<router-link to="/">Logout</router-link>
+			</li>
+		</ul>
+		<ul v-else class="nav justify-content-end">
 			<li class="nav-item">
 				<router-link to="/login">Login</router-link>
 			</li>
 			<li class="nav-item">
 				<router-link to="/register">Register</router-link>
 			</li>
-			<li class="nav-item">
-				<router-link to="/user">User</router-link>
-			</li>
-
 		</ul>
 	</div>
 </template>
@@ -32,5 +32,9 @@ export default {
 li {
 	padding-right: 10px;
 	margin: 10px 0;
+}
+
+router-link {
+	color: white;
 }
 </style>
