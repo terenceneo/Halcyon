@@ -23,7 +23,7 @@
 <script>
 export default {
 	name: 'StudyGroup',
-	props: ['user'],
+	props: ['user', 'username', 'moduleList'],
 	components: {},
 }
 </script>

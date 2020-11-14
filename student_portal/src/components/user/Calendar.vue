@@ -1,7 +1,7 @@
 <template>
 	<div id='calendar'>
 		<h1>Upcoming Classes</h1>
-			<div class="agenda">
+		<div class="agenda">
 			<div class="table-responsive">
 				<table class="table table-condensed table-bordered">
 					<thead>
@@ -11,57 +11,21 @@
 							<th>Event</th>
 						</tr>
 					</thead>
-					<tbody>
-						<!-- Single event in a single day -->
+
+					<tbody v-for="lesson in timetable" :key="lesson.moduleCode">
 						<tr>
+							<!-- Note: edit rowspan for multiple items in a day -->
 							<td class="agenda-date" rowspan="1">
-								<div class="dayofmonth">2</div>
-								<div class="dayofweek">Monday</div>
-								<div class="shortdate text-muted">November, 2020</div>
+								<!-- <div class="dayofmonth">2</div> -->
+								<div class="dayofweek">{{ lesson.day }}</div>
+								<!-- <div class="shortdate text-muted">November, 2020</div> -->
 							</td>
 							<td class="agenda-time">
-								2:00 - 4:00PM
+								{{ lesson.startTime }} - {{ lesson.endTime }}
 							</td>
 							<td class="agenda-events">
 								<div class="agenda-event">
-									BT4016 Lecture
-								</div>
-							</td>
-						</tr>
-						
-						<!-- Multiple events in a single day (note the rowspan) -->
-						<tr>
-							<td class="agenda-date" rowspan="3">
-								<div class="dayofmonth">3</div>
-								<div class="dayofweek">Tuesday</div>
-								<div class="shortdate text-muted">November, 2020</div>
-							</td>
-							<td class="agenda-time">
-								10:00 - 11:00 AM 
-							</td>
-							<td class="agenda-events">
-								<div class="agenda-event">
-									BT4012 Lecture
-								</div>
-							</td>
-						</tr>
-						<tr>
-							<td class="agenda-time">
-								2:00 - 4:00 PM 
-							</td>
-							<td class="agenda-events">
-								<div class="agenda-event">
-									IS4228 Lecture
-								</div>
-							</td>
-						</tr>
-						<tr>
-							<td class="agenda-time">
-								7:00 - 9:00 PM
-							</td>
-							<td class="agenda-events">
-								<div class="agenda-event">
-									BT4016 Tutorial
+									{{ lesson.moduleCode }} {{ lesson.lessonType }}
 								</div>
 							</td>
 						</tr>
@@ -70,7 +34,6 @@
 			</div>
 		</div>
 	</div>
-	
 </template>
 
 <script>
@@ -78,6 +41,25 @@ export default {
 	name: 'Calendar',
 	props: ['user', 'username', 'moduleList'],
 	components: {},
+	computed: {
+		timetable: function() {
+			let lessons = [];
+			this.moduleList.forEach(mod => {
+				mod.semesterData
+					.filter(sem => sem.semester == '2')
+					.forEach(sem => {
+						sem.timetable.forEach(cls => {
+							lessons.push({
+								moduleCode: mod.moduleCode,
+								title: mod.title,
+								...cls,
+							});
+						});
+					});
+				});
+			return lessons;
+		}
+	}
 }
 </script>
 
