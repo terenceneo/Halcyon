@@ -7,6 +7,7 @@
 			v-bind:user="user"
 			v-bind:username="username"
 			v-bind:module-list="moduleList"
+			v-bind:timetable="timetable"
 		></router-view>
 		<AppFooter v-bind:user="user"></AppFooter>	
 	</div>
@@ -38,6 +39,25 @@ export default {
 				{path: 'studyprogress', text: 'Study Progress'},
 				{path: 'mentalwellbeing', text: 'Mental Wellbeing'},
 			],
+		}
+	},
+	computed: {
+		timetable: function() {
+			let lessons = [];
+			this.moduleList.forEach(mod => {
+				mod.semesterData
+					.filter(sem => sem.semester == '2')
+					.forEach(sem => {
+						sem.timetable.forEach(cls => {
+							lessons.push({
+								moduleCode: mod.moduleCode,
+								title: mod.title,
+								...cls,
+							});
+						});
+					});
+				});
+			return lessons;
 		}
 	},
 	mounted: function() {

@@ -39,27 +39,8 @@
 <script>
 export default {
 	name: 'Calendar',
-	props: ['user', 'username', 'moduleList'],
+	props: ['user', 'username', 'moduleList', 'timetable'],
 	components: {},
-	computed: {
-		timetable: function() {
-			let lessons = [];
-			this.moduleList.forEach(mod => {
-				mod.semesterData
-					.filter(sem => sem.semester == '2')
-					.forEach(sem => {
-						sem.timetable.forEach(cls => {
-							lessons.push({
-								moduleCode: mod.moduleCode,
-								title: mod.title,
-								...cls,
-							});
-						});
-					});
-				});
-			return lessons;
-		}
-	}
 }
 </script>
 
