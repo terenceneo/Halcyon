@@ -13,10 +13,10 @@
 			</ul>
 		</div>
 		<div>
-			<input type="image" id="image" alt="Calendar" src="/student_portal/src/assets/graduation.png" />
-			<input type="image" id="image" alt="Calendar" src="/student_portal/src/assets/graduation.png" />
-			<input type="image" id="image" alt="Calendar" src="/student_portal/src/assets/graduation.png" />
-			<input type="image" id="image" alt="Calendar" src="/student_portal/src/assets/graduation.png" />
+			<input type="image" id="image" alt="Calendar" src="../../../assets/graduation.png" />
+			<input type="image" id="image" alt="Calendar" src="../../../assets/graduation.png" />
+			<input type="image" id="image" alt="Calendar" src="../../../assets/graduation.png" />
+			<input type="image" id="image" alt="Calendar" src="../../../assets/graduation.png" />
 		</div>
 	</div>
 	
