@@ -10,7 +10,7 @@
 <script>
     export default {
 		name: 'mentalWellbeing',
-		props: ['user'],
+        props: ['user', 'username', 'moduleList'],
 		components: {},
         data() {
             return {

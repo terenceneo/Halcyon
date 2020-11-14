@@ -1,6 +1,17 @@
 <template>
-	<div id="appHeader" >
-		<AppNav :user="user" :style="{'background-color':color}"></AppNav>
+	<div id="appHeader">
+		<AppNav 
+			v-if="user"
+			:routes="routesLogout" 
+			:style="{'background-color':color}"
+			right=True
+		></AppNav>
+		<AppNav 
+			v-else
+			:routes="routes"
+			:style="{'background-color':color}"
+			right=True
+		></AppNav>
 		<div class="jumbotron" :style="{'background-color':color}" >
 			<h1 class="display-4">H A L C Y O N</h1>
 			<p class="lead">Changing the way students work from home.</p>
@@ -9,12 +20,6 @@
 				v-img :src="require('@/assets/graduation.png')" 
 				width="250"
 			/>
-			<!-- <hr class="my-4">
-				<div style="text-align: center">
-				<router-link class="btn btn-primary btn-lg" to="/login" role="button">Log In</router-link>
-				<div class="divider"/>
-				<router-link class="btn btn-primary btn-lg" to="/register" role="button">Register Now</router-link>
-			</div> -->
 		</div>
 	</div>
 </template>
@@ -30,7 +35,14 @@ export default {
 	},
 	data: function() {
 		return{
-			color:"#AFEEEE"
+			color:"#AFEEEE",
+			routes: [
+				{path: 'login', text: 'Login'},
+				{path: 'register', text: 'Register'},
+			],
+			routesLogout: [
+				{path: '/', text: 'Logout'}
+			]
 		}
 	}
 }
