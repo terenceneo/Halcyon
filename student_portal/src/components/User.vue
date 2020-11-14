@@ -49,9 +49,7 @@ export default {
 		return {
 			user: {
 				id: this.$route.params.id,
-				username: null,
-				modules: [],
-				assignments: []
+				username: null
 			}
 		}
 	},
