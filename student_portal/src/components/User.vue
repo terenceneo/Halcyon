@@ -2,8 +2,7 @@
 	<div id="user-container">
 		<AppHeader v-bind:user="$route.params.id"></AppHeader>
 		
-		<h1> Welcome {{ $route.params.id }} !</h1>
-		<p>Username is this {{ msg() }}</p>
+		<h1> Welcome {{ getUsername() }}!</h1>
 		<p>This is a container component that performs a one-time update for headers and whatnot with user information upon a successful login.</p>
 		<p class="text-right">
 			{{ $route.params.id }}
@@ -45,11 +44,17 @@ export default {
 		AppHeader,
 		AppFooter,
 	},
+	data: function () {
+		return {
+			username: null
+		}
+	},
 	methods: {
-		msg() {
-			ref = database.collection("user").doc("1loa9B1b3BH3nghpTeRG");
-			doc = await ref.get();
-			return doc.data();
+		getUsername() {
+			database.collection("user").doc(this.$route.params.id).get().then((doc)=>{
+				this.username = doc.data().username;
+			})
+			return this.username;
 		}
 	}
 }
