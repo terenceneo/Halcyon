@@ -1,11 +1,12 @@
 <template>
 	<div id="user-container">
-		<AppHeader v-bind:user="$route.params.id"></AppHeader>
+		<AppHeader v-bind:user="user"></AppHeader>
 		
 		<h1> Welcome {{ getUsername() }}!</h1>
 		<p>This is a container component that performs a one-time update for headers and whatnot with user information upon a successful login.</p>
 		<p class="text-right">
-			{{ $route.params.id }}
+			{{ getUsername() }}
+			{{ user }}
 		</p>
 		<ul class="nav justify-content-end">
 			<li class="nav-item">
@@ -28,8 +29,8 @@
 			</li>
 		</ul>
 
-		<router-view v-bind:user="$route.params.id"></router-view>
-		<AppFooter v-bind:user="$route.params.id"></AppFooter>	
+		<router-view v-bind:user="user"></router-view>
+		<AppFooter v-bind:user="user"></AppFooter>	
 	</div>
 </template>
 
@@ -46,15 +47,20 @@ export default {
 	},
 	data: function () {
 		return {
-			username: null
+			user: {
+				id: this.$route.params.id,
+				username: null,
+				modules: [],
+				assignments: []
+			}
 		}
 	},
 	methods: {
 		getUsername() {
-			database.collection("user").doc(this.$route.params.id).get().then((doc)=>{
-				this.username = doc.data().username;
+			database.collection("user").doc(this.user.id).get().then((doc)=>{
+				this.user.username = doc.data().username;
 			})
-			return this.username;
+			return this.user.username;
 		}
 	}
 }

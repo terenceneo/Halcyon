@@ -4,6 +4,7 @@
 		<div class="jumbotron" :style="{'background-color':color}" >
 			<h1 class="display-4">H A L C Y O N</h1>
 			<p class="lead">Changing the way students work from home.</p>
+			<p>{{ user }}</p>
 			<img id="thumbnail"
 				v-if="showImage"
 				v-img :src="require('@/assets/graduation.png')" 
