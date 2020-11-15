@@ -24,7 +24,12 @@
 					</tr>
 					<tr>
 						<td colspan=2>
-							<input type="text" class="form-control" placeholder="Module code" v-model.trim="moduleCode" required>
+							<input 
+								class="form-control" 
+								type="text" 
+								v-model.trim="moduleCode" 
+								:placeholder="modulePrompt" 
+								required>
 						</td>
 						<td>		
 							<button class="btn btn-primary btn-block" type="submit">Add Module</button>
@@ -46,6 +51,7 @@ export default {
 	components: {},
 	data: function() {
 		return {
+			modulePrompt: "Module code",
 			moduleCode: null,
 		}
 	},
@@ -53,14 +59,12 @@ export default {
 		addModule(moduleCode) {
 			moduleCode = moduleCode.toUpperCase();
 			if (this.moduleList.some(entry => entry.moduleCode == moduleCode)) {
-				alert(moduleCode+' already added!');
-				this.moduleCode = null;
+				this.modulePrompt = 'Module code ('+moduleCode+' already added!)' 
 			} else {
 				let url = 'https://api.nusmods.com/v2/2019-2020/modules/'+moduleCode+'.json'
 				request.get(url, { json: true }, (err, res, body) => {
 					if (res.statusCode != 200) {
-						alert(moduleCode+' is not a module!');
-						this.moduleCode = null;
+						this.modulePrompt = 'Module code ('+moduleCode+' is not a module!)'
 					} else {
 						this.moduleList.push(body);
 						db.collection('user').doc(this.user).update({modules: this.moduleList});
@@ -74,11 +78,11 @@ export default {
 							})
 							db.collection('user').doc(this.user).update({modules: this.alertList});
 						}
-						alert('Added '+moduleCode+'!');
-						this.moduleCode = null;
+						this.modulePrompt = 'Module code'
 					}
 				});
 			}
+			this.moduleCode = null;
 			return
 		},
 		removeModule(moduleCode) {

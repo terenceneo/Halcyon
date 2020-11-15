@@ -40,7 +40,7 @@
                             </select>
                         </td>
                         <td>
-                            <input type="text" class="form-control" placeholder="Task" v-model="taskName" required>
+                            <input type="text" class="form-control" :placeholder="taskPrompt" v-model="taskName" required>
                         </td>
                         <td class="input-group">
                             <input type="number" class="form-control" placeholder="Weightage" v-model.trim.number="weightage" min=0 max=100 required>
@@ -71,6 +71,7 @@ export default {
 	components: {},
     data() {
         return {
+            taskPrompt: 'Task',
             moduleCode: null,
             taskName: null,
             deadline: null,
@@ -80,38 +81,25 @@ export default {
     methods: {
         addTask(moduleCode, taskName, deadline, weightage) {
             moduleCode = moduleCode.toUpperCase();
-            if (!moduleCode) {
-                alert('Please select a module!');
-            }
-            else if (!this.weightage) {
-                alert('Enter a numerical weightage!');
-            }
-            else if (!this.moduleList.some(entry => entry.moduleCode==moduleCode )) {
-                alert('You are not taking '+moduleCode+'! (Add it under My Modules)');
-            } 
-            else if (this.taskList.some(entry => entry.moduleCode==moduleCode & entry.taskName==taskName)) {
-                alert(moduleCode+' '+taskName+' already added!');
-            } 
-            // else if (weightage) {
-            //     // Do input validation here
-            // } 
-            else {
+            if (this.taskList.some(entry => entry.moduleCode==moduleCode && entry.taskName==taskName)) {
+                this.taskPrompt = 'Task ('+moduleCode+' '+taskName+' already added!)';
+            } else {
                 this.taskList.push({
                     moduleCode,
                     taskName,
                     deadline,
                     weightage,
                 });
-                alert('Added '+moduleCode+': '+taskName+'!');
-                this.moduleCode = null;
-                this.taskName = null;
-                this.deadline = null;
-                this.weightage = null;
+                this.taskPrompt = 'Task';
             }
+            this.moduleCode = null;
+            this.taskName = null;
+            this.deadline = null;
+            this.weightage = null;
             return
         },
         removeTask(moduleCode, taskName) {
-            this.taskList = this.taskList.filter(entry => entry.moduleCode!=moduleCode & entry.taskName!=taskName)
+            this.taskList = this.taskList.filter(entry => entry.moduleCode!=moduleCode || entry.taskName!=taskName)
             db.collection('user').doc(this.user).update({task: this.taskList});
             return
         },
