@@ -73,23 +73,28 @@ export default {
 						});
 					});
 				});
-			return lessons;
+
+			return lessons.sort(this.byCountdown);
 		},
 		tasks: function() {
-			return this.taskList.map(task => {
+			let tasks = this.taskList.map(task => {
 				return {
 					countdown: Math.floor((new Date(task.deadline) - this.today) / (1000*60*60*24)),
 					alertText: task.moduleCode+' '+task.taskName+' deadline',
 					...task,
 				}
 			})
+			return tasks.sort(this.byCountdown);
 		},
 		alerts: function() {
 			// Sorts user's lessons and assignments by countdown
-			return [...this.timetable, ...this.tasks].sort((alert1, alert2) => alert1.countdown - alert2.countdown);
+			return [...this.timetable, ...this.tasks].sort(this.byCountdown);
 		}
 	},
 	methods: {
+		byCountdown(item1, item2) {
+			return item1.countdown - item2.countdown;
+		},
 		docToData(doc) {
 			// Reads component data from a firebase document
 			if (doc.exists) {
