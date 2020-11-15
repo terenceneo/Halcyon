@@ -42,10 +42,28 @@
 				<!-- <li class="list-group-item">DBA 2705 Assignment 2 Due</li> -->
 			</tbody>
 		</div>
+		<div>
+			<p>
+				Find classmates for module:
+				<select class="custom-select" v-model="moduleCode" @change="getClassmates(moduleCode)">
+					<option 
+						v-for="module in moduleList" 
+						:key="module.moduleCode"
+						:value="module.moduleCode"
+					>{{ module.moduleCode }} - {{module.title}}</option>
+				</select>
+				<ul class="list-group list-group-flush">
+					<li class="list-group-item" v-for="classmate in classmates" :key="classmate.user">
+						<span>classmate.username</span>
+					</li>
+				</ul>
+			</p>
+		</div>
 	</div>
 </template>
 
 <script>
+import db from '../../firebase.js'
 import modchats from '@/assets/modchats.json'
 export default {
 	name: 'StudyGroup',
@@ -55,6 +73,8 @@ export default {
 		return {
 			modchatsList: modchats,
 			tele: null,
+			classmates: [],
+			moduleCode: null,
 		}
 	},
 	methods: {
@@ -68,7 +88,25 @@ export default {
 			} else {
 				return null;
 			}
-		}
+		},
+		getClassmates: function(moduleCode) {
+			console.log("called getClassmates for " + moduleCode)
+			this.classmates = []
+			db.collection('user').get().then(querySnapShot => {
+				querySnapShot.forEach(user => {
+					user.modules.forEach(mod => {
+						if (mod.moduleCode == moduleCode) {
+							this.classmates.push({
+								id: user,
+								username: user.username
+							});
+						}
+					})
+				})
+			});
+			console.log(this.classmates)
+			return;
+		},
 	}
 }
 </script>
