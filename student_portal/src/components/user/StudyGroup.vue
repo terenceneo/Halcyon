@@ -1,11 +1,10 @@
 <template>
 	<div id='studyGroup'>
 		<h1>Study Groups</h1>
-		<div>
+		<div class="row bm-3">
 			<p>Feeling lost and alone during this period? Fear not! Make new friends by joining a study group.</p>
-			<!-- <input type="text" name="Enter your Module Code here"> -->
 		</div>
-		<div class="col-sm-7 col-md-7 col-lg-7 mx-auto">
+		<div class="row bm-3">
 			<p>Study groups that you're currently in:</p>
 			<table class="table">
 				<thead class="thead-light">
@@ -40,22 +39,20 @@
 				</tbody>
 			</table>
 		</div>
-		<div>
-			<p>
-				Find classmates for module:
-				<select class="custom-select" v-model="moduleCode" @change="getClassmates(moduleCode)">
-					<option 
-						v-for="module in moduleList" 
-						:key="module.moduleCode"
-						:value="module.moduleCode"
-					>{{ module.moduleCode }} - {{module.title}}</option>
-				</select>
-				<ul class="list-group list-group-flush">
-					<li class="list-group-item" v-for="classmate in classmates" :key="classmate.user">
-						<span>classmate.username</span>
-					</li>
-				</ul>
-			</p>
+		<div class="row bm-3">
+			<p>Find classmates for module:</p>
+			<select class="custom-select" v-model="moduleCode" @change="getClassmates(moduleCode)">
+				<option 
+					v-for="module in moduleList" 
+					:key="module.moduleCode"
+					:value="module.moduleCode"
+				>{{ module.moduleCode }} - {{module.title}}</option>
+			</select>
+			<ul class="list-group list-group-flush">
+				<li class="list-group-item" v-for="classmate in classmates" :key="classmate.user">
+					<span>classmate.username</span>
+				</li>
+			</ul>
 		</div>
 	</div>
 </template>
