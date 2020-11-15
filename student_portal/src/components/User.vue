@@ -7,15 +7,17 @@
 		</AppHeader>
 		<h1> Welcome {{ username }}!</h1>
 		<AppNav v-bind:routes="routes" center=True></AppNav>
-		<router-view 
-			v-bind:user="user"
-			v-bind:username="username"
-			v-bind:module-list="moduleList"
-			v-bind:task-list="taskList"
-			v-bind:alert-list="alertList"
-			v-bind:timetable="timetable"
-			v-bind:today="today"
-		></router-view>
+		<div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+			<router-view 
+				v-bind:user="user"
+				v-bind:username="username"
+				v-bind:module-list="moduleList"
+				v-bind:task-list="taskList"
+				v-bind:alert-list="alertList"
+				v-bind:timetable="timetable"
+				v-bind:today="today"
+			></router-view>
+		</div>
 		<AppFooter v-bind:user="user"></AppFooter>	
 	</div>
 </template>
