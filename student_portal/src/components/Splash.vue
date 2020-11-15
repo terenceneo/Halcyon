@@ -1,12 +1,6 @@
 <template>
 	<div id="splash">
 		<AppHeader show-image=True></AppHeader>
-		<div>
-			<img v-img :src="require('@/assets/calendar.png')" width="250">
-			<img v-img :src="require('@/assets/graduation.png')" width="250">
-			<img v-img :src="require('@/assets/send.png')" width="250">
-			<img v-img :src="require('@/assets/workspace.png')" width="250">
-		</div>	
 		<AppFooter></AppFooter>	
 	</div>
 </template>
@@ -26,7 +20,7 @@ export default {
 
 <style lang="css" scoped>
 img {
-	padding-right: 100px;
+	padding: 0px 50px;
 	margin: 10px 0;
 }
 </style>

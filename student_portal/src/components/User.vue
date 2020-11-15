@@ -1,35 +1,14 @@
 <template>
 	<div id="user-container">
-		<AppHeader v-bind:user="user"></AppHeader>
-		
-		<h1> Welcome {{ getUsername() }}!</h1>
-		<p>This is a container component that performs a one-time update for headers and whatnot with user information upon a successful login.</p>
-		<p class="text-right">
-			{{ getUsername() }}
-			{{ user }}
-		</p>
-		<ul class="nav justify-content-end">
-			<li class="nav-item">
-				<router-link to="home">Home</router-link>
-			</li>
-			<li class="nav-item">
-				<router-link to="calendar">Calendar</router-link>
-			</li>
-			<li class="nav-item">
-				<router-link to="modules">Modules</router-link>
-			</li>
-			<li class="nav-item">
-				<router-link to="studygroup">Study Group</router-link>
-			</li>
-			<li class="nav-item">
-				<router-link to="studyprogress">Study Progress</router-link>
-			</li>
-			<li class="nav-item">
-				<router-link to="mentalwellbeing">Mental Wellbeing</router-link>
-			</li>
-		</ul>
-
-		<router-view v-bind:user="user"></router-view>
+		<AppHeader v-bind:user="user" show-image=True></AppHeader>
+		<h1> Welcome {{ username }}!</h1>
+		<AppNav v-bind:routes="routes" center=True></AppNav>
+		<router-view 
+			v-bind:user="user"
+			v-bind:username="username"
+			v-bind:module-list="moduleList"
+			v-bind:timetable="timetable"
+		></router-view>
 		<AppFooter v-bind:user="user"></AppFooter>	
 	</div>
 </template>
@@ -37,28 +16,69 @@
 <script>
 import AppHeader from './app/Header.vue'
 import AppFooter from './app/Footer.vue'
-import database from '../firebase.js'
+import AppNav from './app/Nav.vue'
+import db from '../firebase.js'
+
 
 export default {
 	name: 'User',
 	components: {
 		AppHeader,
 		AppFooter,
+		AppNav,
 	},
-	data: function () {
+	data: function() {
 		return {
-			user: {
-				id: this.$route.params.id,
-				username: null
-			}
+			user: null,
+			username: null,
+			moduleList: [],
+			routes: [
+				{path: 'home', text: 'Home'},
+				{path: 'calendar', text: 'My Calendar'},
+				{path: 'modules', text: 'My Modules'},
+				{path: 'studygroup', text: 'Study Group'},
+				{path: 'studyprogress', text: 'Study Progress'},
+				{path: 'mentalwellbeing', text: 'Mental Wellbeing'},
+			],
 		}
+	},
+	computed: {
+		timetable: function() {
+			let lessons = [];
+			this.moduleList.forEach(mod => {
+				mod.semesterData
+					.filter(sem => sem.semester == '2')
+					.forEach(sem => {
+						sem.timetable.forEach(cls => {
+							lessons.push({
+								moduleCode: mod.moduleCode,
+								title: mod.title,
+								...cls,
+							});
+						});
+					});
+				});
+			return lessons;
+		}
+	},
+	mounted: function() {
+		db.collection('users').doc(this.$route.params.id)
+			.onSnapshot(doc => {
+				this.user = this.$route.params.id;
+				this.username = doc.data().username;
+				this.moduleList = doc.data().modules;
+			})
+			.catch(error => {
+				console.log(error);
+			})
+		return
 	},
 	methods: {
 		getUsername() {
-			database.collection("user").doc(this.user.id).get().then((doc)=>{
-				this.user.username = doc.data().username;
+			database.collection("user").doc(this.user).get().then((doc)=>{
+				this.username = doc.data().username;
 			})
-			return this.user.username;
+			return this.username;
 		}
 	}
 }

@@ -1,7 +1,11 @@
 <template>
 	<div id="appFooter">
-		<!-- <h1>I am a footer</h1>
-		<p v-if="user">User "{{ user }}" is logged in.</p> -->
+		<div>
+			<img v-img :src="require('@/assets/calendar.png')" width="250"/>
+			<img v-img :src="require('@/assets/graduation.png')" width="250"/>
+			<img v-img :src="require('@/assets/send.png')" width="250"/>
+			<img v-img :src="require('@/assets/workspace.png')" width="250"/>
+		</div>	
 	</div>
 </template>
 
@@ -14,6 +18,8 @@ export default {
 </script>
 
 <style lang="css" scoped>
-#appFooter {
+img {
+	padding: 0px 50px;
+	margin: 10px 0;
 }
 </style>
