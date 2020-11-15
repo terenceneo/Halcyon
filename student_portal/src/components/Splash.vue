@@ -19,8 +19,4 @@ export default {
 </script>
 
 <style lang="css" scoped>
-img {
-	padding: 0px 50px;
-	margin: 10px 0;
-}
 </style>

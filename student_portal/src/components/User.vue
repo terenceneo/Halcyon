@@ -7,6 +7,7 @@
 			v-bind:user="user"
 			v-bind:username="username"
 			v-bind:module-list="moduleList"
+			v-bind:task-list="taskList"
 			v-bind:timetable="timetable"
 		></router-view>
 		<AppFooter v-bind:user="user"></AppFooter>	
@@ -31,6 +32,7 @@ export default {
 			user: null,
 			username: null,
 			moduleList: [],
+			taskList: [],
 			routes: [
 				{path: 'home', text: 'Home'},
 				{path: 'calendar', text: 'My Calendar'},
@@ -66,22 +68,24 @@ export default {
 				this.user = this.$route.params.id;
 				this.username = doc.data().username;
 				this.moduleList = doc.data().modules;
+				// this.taskList = doc.data().taskList,
 				console.log(this.user);
 				console.log(this.username);
 				console.log(this.moduleList);
+				console.log(this.taskList);
 			})
 		
-		// db.collection('users').doc(this.$route.params.id)
-		// 	.onSnapshot(doc => {
-		// 		let data = doc.data();
-		// 		this.user = this.$route.params.id;
-		// 		this.username = data.username;
-		// 		this.moduleList = data.modules;
-		// 		console.log('Listener caught updates:')
-		// 		console.log(this.user);
-		// 		console.log(this.username);
-		// 		console.log(this.moduleList);
-		// 	})				
+		db.collection('users').doc(this.$route.params.id)
+			.onSnapshot(doc => {
+			this.user = this.$route.params.id;
+				this.username = doc.data().username;
+				this.moduleList = doc.data().modules;
+				// this.taskList = doc.data().taskList,
+				console.log(this.user);
+				console.log(this.username);
+				console.log(this.moduleList);
+				console.log(this.taskList);
+			})				
 		return
 	},
 }
@@ -90,6 +94,6 @@ export default {
 <style lang="css" scoped>
 li {
 	padding-right: 10px;
-	margin: 10px 0;
+	margin: 10px;
 }
 </style>

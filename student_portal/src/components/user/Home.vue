@@ -24,7 +24,6 @@ export default {
 <style lang="css" scoped>
 #home {
 	margin: 5px;
-	border: solid black 1px;
 }
 
 </style>

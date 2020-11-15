@@ -3,7 +3,7 @@
 		<div class="row">
 			<div class="col-sm-9 col-md-7 col-lg-5 	mx-auto">
 			
-				<h1>My Modules {{ username }}</h1>
+				<h1>My Modules</h1>
 				
 				<form v-on:submit.prevent="addModule(moduleCode)">
 					<input type="text" id="module" class="form-control" v-model="moduleCode">
