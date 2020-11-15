@@ -2,7 +2,6 @@
 	<div id='studyProgress'>
         <div class="row">
             <div class="col-sm-9 col-md-7 col-lg-5  mx-auto">
-                {{ timerCount }}
 
                 <h1>My Tasks</h1>
                 
@@ -48,23 +47,10 @@ export default {
 	components: {},
     data() {
         return {
-            timerCount: 30,
             moduleCode: null,
             taskName: null,
             deadline: null,
             weightage: null,
-        }
-    },
-    watch: {
-        timerCount: {
-            handler(value) {
-                if (value > 0) {
-                    setTimeout(() => {
-                        this.timerCount--;
-                    }, 1000);
-                }
-            },
-            immediate: true // This ensures the watcher is triggered upon creation
         }
     },
     methods: {
