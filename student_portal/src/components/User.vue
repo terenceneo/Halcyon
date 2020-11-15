@@ -19,7 +19,6 @@ import AppFooter from './app/Footer.vue'
 import AppNav from './app/Nav.vue'
 import db from '../firebase.js'
 
-
 export default {
 	name: 'User',
 	components: {
@@ -61,18 +60,6 @@ export default {
 			return lessons;
 		}
 	},
-	mounted: function() {
-		db.collection('users').doc(this.$route.params.id)
-			.onSnapshot(doc => {
-				this.user = this.$route.params.id;
-				this.username = doc.data().username;
-				this.moduleList = doc.data().modules;
-			})
-			.catch(error => {
-				console.log(error);
-			})
-		return
-	},
 	methods: {
 		getUsername() {
 			database.collection("user").doc(this.user).get().then((doc)=>{
@@ -80,7 +67,31 @@ export default {
 			})
 			return this.username;
 		}
-	}
+	},
+	mounted: function() {
+		db.collection('user').doc(this.$route.params.id).get()
+			.then(doc => {
+				this.user = this.$route.params.id;
+				this.username = doc.data().username;
+				this.moduleList = doc.data().modules;
+				console.log(this.user);
+				console.log(this.username);
+				console.log(this.moduleList);
+			})
+		
+		// db.collection('users').doc(this.$route.params.id)
+		// 	.onSnapshot(doc => {
+		// 		let data = doc.data();
+		// 		this.user = this.$route.params.id;
+		// 		this.username = data.username;
+		// 		this.moduleList = data.modules;
+		// 		console.log('Listener caught updates:')
+		// 		console.log(this.user);
+		// 		console.log(this.username);
+		// 		console.log(this.moduleList);
+		// 	})				
+		return
+	},
 }
 </script>
 

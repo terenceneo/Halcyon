@@ -18,7 +18,7 @@ const routes = [
 	{
 		// User has access to path id as $route.params.id
 		// Use this to update headers with user name etc.
-		path: '/user/:id',
+		path: '/user/:id', 
 		component: User,
 		props: true,
 		
