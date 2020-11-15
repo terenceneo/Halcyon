@@ -4,7 +4,7 @@
 		<div class="row bm-3">
 			<p>Feeling lost and alone during this period? Fear not! Make new friends by joining a study group.</p>
 		</div>
-		<div class="col-sm-7 col-md-7 col-lg-7 mx-auto">
+		<div class="row bm-3">
 			<p><b>Study groups that you're currently in:</b></p>
 			<table class="table">
 				<thead class="thead-light">
@@ -40,7 +40,7 @@
 			</table>
 		</div>
 
-		<div class="col-sm-7 col-md-7 col-lg-7 mx-auto" v-if="moduleCode">
+		<div class="row bm-3" v-if="moduleCode">
 			<p>
 				<b>Classmates for {{ moduleCode }} - {{ title }}</b>
 				<!-- <select v-model="moduleCode" @change="getClassmates(moduleCode)">

@@ -1,32 +1,10 @@
 <template>
 	<div id='studyProgress'>
         <h1>My Tasks</h1>
-        <div class="row mb-3">
+        <!-- <div class="row mb-3">
             <Pomodoro/>
-        </div>
-        <div class="row mb-3">
-            <form v-on:submit.prevent="addTask(moduleCode, taskName, deadline, weightage)">
-                <div class="input-group">
-                    <select class="custom-select" v-model="moduleCode" required>
-                        <option 
-                            v-for="module in moduleList" 
-                            :key="module.moduleCode"
-                            :value="module.moduleCode"
-                        >{{ module.moduleCode }}</option>
-                    </select>
-                    <input type="text" class="form-control" placeholder="Task" v-model="taskName" required>
-                    <input type="number" class="form-control" placeholder="Weightage" v-model.trim.number="weightage" min=0 max=100 required>
-                    <div class="input-group-append">
-                        <span class="input-group-text">%</span>
-                    </div>
-                    <input type="date" class="form-control" placeholder="Due date" v-model="deadline" required>
-                    <div class="input-group-append">
-                        <button class="btn btn-primary btn-block" type="submit">Add Task</button>
-                    </div>
-                </div>
-            </form>
-        </div>
-        <div class="row mb-3">
+        </div> -->
+        <form class="row mb-3" v-on:submit.prevent="addTask(moduleCode, taskName, deadline, weightage)">
             <table class="table">
                 <thead class="thead-light">
                     <tr>
@@ -45,21 +23,47 @@
                         <td>{{ task.deadline }}</td>
                         <td>
                             <button 
-                                class="btn btn-primary" 
+                                class="btn btn-primary btn-block" 
                                 v-on:click="removeTask(task.moduleCode, task.taskName)"
                             >Done!</button>
                         </td>
                     </tr>
+                    <tr>
+                        <td>
+                            <select class="custom-select" v-model="moduleCode" required>
+                                <option 
+                                    v-for="module in moduleList" 
+                                    :key="module.moduleCode"
+                                    :value="module.moduleCode"
+                                >{{ module.moduleCode }}</option>
+                            </select>
+                        </td>
+                        <td>
+                            <input type="text" class="form-control" placeholder="Task" v-model="taskName" required>
+                        </td>
+                        <td class="input-group">
+                            <input type="number" class="form-control" placeholder="Weightage" v-model.trim.number="weightage" min=0 max=100 required>
+                            <div class="input-group-append">
+                                <span class="input-group-text">%</span>
+                            </div>
+                        </td>
+                        <td>
+                            <input type="date" class="form-control" placeholder="Due date" v-model="deadline" required>
+                        </td>
+                        <td>
+                            <button class="btn btn-primary btn-block" type="submit">Add Task</button>
+                        </td>
+                    </tr>
                 </tbody>
             </table>    
-        </div>
+        </form>
 	</div>
 	
 </template>
 
 <script>
 import db from '../../firebase.js'
-    
+
 export default {
 	name: 'mentalWellbeing',
     props: ['user', 'username', 'moduleList', 'taskList'],
