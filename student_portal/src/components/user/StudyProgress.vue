@@ -58,13 +58,11 @@
 
 <script>
 import db from '../../firebase.js'
-import Pomodoro from 'vuemodoro'
+    
 export default {
 	name: 'mentalWellbeing',
     props: ['user', 'username', 'moduleList', 'taskList'],
-	components: {
-        Pomodoro,
-    },
+	components: {},
     data() {
         return {
             moduleCode: null,
