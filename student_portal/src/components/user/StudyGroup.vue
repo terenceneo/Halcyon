@@ -54,7 +54,7 @@ export default {
 	data: function() {
 		return {
 			modchatsList: modchats,
-			tele: "tee",
+			tele: null,
 		}
 	},
 	methods: {
