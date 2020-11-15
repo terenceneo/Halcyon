@@ -40,32 +40,30 @@
 			</table>
 		</div>
 
-		<div class="row bm-3" v-if="moduleCode">
-			<p>
-				<b>Classmates for {{ moduleCode }} - {{ title }}</b>
-				<!-- <select v-model="moduleCode" @change="getClassmates(moduleCode)">
-					<option 
-						v-for="module in moduleList" 
-						:key="module.moduleCode"
-						:value="module.moduleCode"
-					>{{ module.moduleCode }} - {{module.title}}</option>
-				</select> -->
-
-				<table class="table" v-if="classmates.length">
-					<thead class="thead-light">
-						<tr>
-							<th scope="col">Username</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr  v-for="classmate in classmates" :key="classmate.user">
-							<span>{{ classmate.username }}</span>
-						</tr>
-					</tbody>
-						
-				</table>
-				<table class="table" v-else>No classmates found</table>
-			</p>
+		<div class="row bm-3" v-show="moduleCode">
+			<b>Classmates for {{ moduleCode }} - {{ title }}</b>
+			<table class="table">
+				<thead class="thead-light">
+					<tr>
+						<th scope="col">Username</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr v-if="!classmates.length">
+						<td>No classmates found!</td>
+					</tr>
+					<tr v-for="classmate in classmates" :key="classmate.user">
+						<td>{{ classmate.username }}</td>
+					</tr>
+				</tbody>		
+			</table>
+			<!-- <select v-model="moduleCode" @change="getClassmates(moduleCode)">
+				<option 
+					v-for="module in moduleList" 
+					:key="module.moduleCode"
+					:value="module.moduleCode"
+				>{{ module.moduleCode }} - {{module.title}}</option>
+			</select> -->
 		</div>
 	</div>
 </template>
