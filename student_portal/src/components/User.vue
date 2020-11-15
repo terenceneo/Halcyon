@@ -11,6 +11,7 @@
 			v-bind:user="user"
 			v-bind:username="username"
 			v-bind:module-list="moduleList"
+			v-bind:alert-list="alertList"
 			v-bind:timetable="timetable"
 			v-bind:today="today"
 		></router-view>
@@ -36,6 +37,7 @@ export default {
 			user: null,
 			username: null,
 			moduleList: [],
+			alertList: [],
 			today: null,
 			routes: [
 				{path: 'home', text: 'Home'},
@@ -80,6 +82,7 @@ export default {
 				this.user = this.$route.params.id;
 				this.username = doc.data().username;
 				this.moduleList = doc.data().modules;
+				this.alertList = doc.data().alerts;
 				this.today = new Date();
 				console.log(this.today);
 				console.log(this.user);
