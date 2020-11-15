@@ -6,23 +6,24 @@
         </div>
         <div class="row mb-3">
             <form v-on:submit.prevent="addTask(moduleCode, taskName, deadline, weightage)">
-                <div class="input-group mb-3">
+                <div class="input-group">
                     <select class="custom-select" v-model="moduleCode" required>
                         <option 
                             v-for="module in moduleList" 
                             :key="module.moduleCode"
                             :value="module.moduleCode"
-                        >{{ module.moduleCode }} - {{module.title}}</option>
+                        >{{ module.moduleCode }}</option>
                     </select>
                     <input type="text" class="form-control" placeholder="Task" v-model="taskName" required>
                     <input type="number" class="form-control" placeholder="Weightage" v-model.trim.number="weightage" min=0 max=100 required>
                     <div class="input-group-append">
                         <span class="input-group-text">%</span>
                     </div>
+                    <input type="date" class="form-control" placeholder="Due date" v-model="deadline" required>
+                    <div class="input-group-append">
+                        <button class="btn btn-primary btn-block" type="submit">Add Task</button>
+                    </div>
                 </div>
-                <input type="date" class="form-control" placeholder="Due date" v-model="deadline" required>
-                <br>
-                <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Add Task</button>
             </form>
         </div>
         <div class="row mb-3">
