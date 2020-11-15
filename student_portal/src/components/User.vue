@@ -1,6 +1,10 @@
 <template>
 	<div id="user-container">
-		<AppHeader v-bind:user="user" show-image=True></AppHeader>
+		<AppHeader
+			v-bind:user="user"
+			show-image=True
+			v-bind:today="today">
+		</AppHeader>
 		<h1> Welcome {{ username }}!</h1>
 		<AppNav v-bind:routes="routes" center=True></AppNav>
 		<router-view 
@@ -8,7 +12,9 @@
 			v-bind:username="username"
 			v-bind:module-list="moduleList"
 			v-bind:task-list="taskList"
+			v-bind:alert-list="alertList"
 			v-bind:timetable="timetable"
+			v-bind:today="today"
 		></router-view>
 		<AppFooter v-bind:user="user"></AppFooter>	
 	</div>
@@ -33,6 +39,8 @@ export default {
 			username: null,
 			moduleList: [],
 			taskList: [],
+			alertList: [],
+			today: null,
 			routes: [
 				{path: 'home', text: 'Home'},
 				{path: 'calendar', text: 'My Calendar'},
@@ -62,6 +70,14 @@ export default {
 			return lessons;
 		}
 	},
+	// methods: {
+	// 	getUsername() {
+	// 		db.collection("user").doc(this.user).get().then((doc)=>{
+	// 			this.username = doc.data().username;
+	// 		})
+	// 		return this.username;
+	// 	}
+	// },
 	mounted: function() {
 		db.collection('user').doc(this.$route.params.id).get()
 			.then(doc => {
@@ -69,6 +85,9 @@ export default {
 				this.username = doc.data().username;
 				this.moduleList = doc.data().modules;
 				// this.taskList = doc.data().taskList,
+				this.alertList = doc.data().alerts;
+				this.today = new Date();
+				console.log(this.today);
 				console.log(this.user);
 				console.log(this.username);
 				console.log(this.moduleList);
