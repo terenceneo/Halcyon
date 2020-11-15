@@ -59,7 +59,7 @@ export default {
 	},
 	methods: {
 		getTele: function(moduleCode) {
-			moduleCode = "AH2101";
+			// moduleCode = "AH2101"; // to test with a module found in list
 			let found = this.modchatsList.filter(item => item.module == moduleCode);
 			if (found.length != 0) {
 				this.tele = found[0].telegram;
