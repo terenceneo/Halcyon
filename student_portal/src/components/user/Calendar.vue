@@ -16,9 +16,11 @@
 						<tr>
 							<!-- Note: edit rowspan for multiple items in a day -->
 							<td class="agenda-date" rowspan="1">
-								<!-- <div class="dayofmonth">2</div> -->
+								<div class="dayofmonth">{{ future(lesson.countdown).getDate() }}</div>
 								<div class="dayofweek">{{ lesson.day }}</div>
-								<!-- <div class="shortdate text-muted">November, 2020</div> -->
+								<div class="shortdate text-muted">
+									{{ months[future(lesson.countdown).getMonth()] }}, {{ future(lesson.countdown).getFullYear() }}
+								</div>
 							</td>
 							<td class="agenda-time">
 								{{ lesson.startTime }} - {{ lesson.endTime }}
@@ -39,8 +41,20 @@
 <script>
 export default {
 	name: 'Calendar',
-	props: ['user', 'username', 'moduleList', 'timetable'],
+	props: ['user', 'username', 'timetable', 'today'],
 	components: {},
+	data: function() {
+		return {
+			months: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+		}
+	},
+	methods: {
+		future: function(incr) {
+			let future = new Date()
+			future.setDate(this.today.getDate() + incr);
+			return future;
+		}
+	},
 }
 </script>
 

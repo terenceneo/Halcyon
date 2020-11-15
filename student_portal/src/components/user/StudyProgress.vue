@@ -90,6 +90,7 @@ export default {
                     deadline,
                     weightage,
                 });
+                db.collection('user').doc(this.user).update({tasks: this.taskList});
                 this.taskPrompt = 'Task';
             }
             this.moduleCode = null;
@@ -100,7 +101,7 @@ export default {
         },
         removeTask(moduleCode, taskName) {
             this.taskList = this.taskList.filter(entry => entry.moduleCode!=moduleCode || entry.taskName!=taskName)
-            db.collection('user').doc(this.user).update({task: this.taskList});
+            db.collection('user').doc(this.user).update({tasks: this.taskList});
             return
         },
     }
