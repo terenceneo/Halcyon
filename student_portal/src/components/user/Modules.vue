@@ -1,26 +1,38 @@
 <template>
 	<div id='modules'>
 		<h1>My Modules</h1>
-		<div class="input-group mb-3" v-on:submit.prevent="addModule(moduleCode)">
-			<input type="text" class="form-control" placeholder="Module code">
-			<div class="input-group-append">
-				<button class="btn btn-primary" type="submit">Add Module</button>
-			</div>
-		</div>
-		<table class="table">
-			<thead class="thead-light">
-				<tr>
-					<th scope="col">Module Code</th>
-					<th scope="col">Module Title</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr v-for="mod in moduleList" :key="mod.moduleCode">
-					<td>{{ mod.moduleCode }}</td>
-					<td>{{ mod.title }}</td>
-				</tr>
-			</tbody>
-		</table>
+		<form class="row mb-3" v-on:submit.prevent="addModule(moduleCode)">
+			<table class="table">
+				<thead class="thead-light">
+					<tr>
+						<th scope="col">Module Code</th>
+						<th scope="col">Module Title</th>
+						<th scope="col">Module Title</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr v-for="mod in moduleList" :key="mod.moduleCode">
+						<td>{{ mod.moduleCode }}</td>
+						<td>{{ mod.title }}</td>
+						<td>
+							<button 
+								class="btn btn-primary btn-block"
+								type="button"
+								v-on:click="removeModule(mod.moduleCode)"
+							>Remove</button>
+						</td>
+					</tr>
+					<tr>
+						<td colspan=2>
+							<input type="text" class="form-control" placeholder="Module code" v-model.trim="moduleCode" required>
+						</td>
+						<td>		
+							<button class="btn btn-primary btn-block" type="submit">Add Module</button>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</form>
 	</div>
 </template>
 
