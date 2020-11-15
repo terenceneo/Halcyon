@@ -51,18 +51,20 @@
 					>{{ module.moduleCode }} - {{module.title}}</option>
 				</select> -->
 
-				<table class="table">
+				<table class="table" v-if="classmates.length">
 					<thead class="thead-light">
 						<tr>
 							<th scope="col">Username</th>
 						</tr>
 					</thead>
 					<tbody>
-						<tr v-for="classmate in classmates" :key="classmate.user">
+						<tr  v-for="classmate in classmates" :key="classmate.user">
 							<span>{{ classmate.username }}</span>
 						</tr>
 					</tbody>
+						
 				</table>
+				<table class="table" v-else>No classmates found</table>
 			</p>
 		</div>
 	</div>
@@ -105,7 +107,7 @@ export default {
 			db.collection('user').get().then(querySnapShot => {
 				querySnapShot.forEach(doc => {
 					doc.data().modules.forEach(mod => {
-						if (mod.moduleCode == moduleCode) {
+						if (mod.moduleCode == moduleCode && doc.data().username != this.username) {
 							this.classmates.push({
 								id: doc.id,
 								username: doc.data().username
