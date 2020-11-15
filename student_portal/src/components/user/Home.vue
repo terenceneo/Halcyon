@@ -45,7 +45,14 @@ export default {
 					});
 				});
 			return exams;
-		}
+		},
+		alerts: function() {
+			let alerts = [];
+			// this.timetable.forEach(mod => {
+
+			// });
+			return alerts	
+		},
 	},
 }
 </script>
