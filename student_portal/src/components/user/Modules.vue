@@ -50,7 +50,7 @@ export default {
 						this.moduleCode = null;
 					} else {
 						this.moduleList.push(body);
-						db.collection('users').doc(this.user).update({modules: this.moduleList});
+						db.collection('user').doc(this.user).update({modules: this.moduleList});
 						alert('Added '+moduleCode+'!');
 						this.moduleCode = null;
 					}
@@ -60,7 +60,7 @@ export default {
 		},
 		removeModule(moduleCode) {
 			this.moduleList = this.moduleList.filter(entry => entry.moduleCode!=moduleCode)
-			db.collection('users').doc(this.user).update({modules: this.moduleList});
+			db.collection('user').doc(this.user).update({modules: this.moduleList});
 			return
 		},
 	},
