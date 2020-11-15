@@ -4,28 +4,34 @@
 		<div>
 			<h2>Alerts</h2>
 			<p><i>Note: for testing purposes, we will assume that the sem has not ended and lessons are as timetabled</i></p>
-			<!-- <ul class="list-group list-group-flush" v-for="lesson in timetable" :key="lesson.moduleCode">
-				<li class="list-group-item">
-					{{ lesson.startTime }} - {{ lesson.moduleCode }} {{ lesson.lessonType }}
-				</li>
-			</ul> -->
-			<ul class="list-group list-group-flush" v-for="alert in alertList" :key="alert.moduleCode">
-				<li class="list-group-item">
-					{{ alert.date }} - {{ alert.task }}, {{ alert.moduleCode }} {{ alert.title }}
-				</li>
-				<!-- <li class="list-group-item">GES1010 Assignment 1 Due</li> -->
-				<!-- <li class="list-group-item">DBA 2705 Assignment 2 Due</li> -->
-			</ul>
+			<table class="table">
+				<thead class="thead-light">
+					<tr>
+						<th scope="col">Days Remaining</th>
+						<th scope="col">Activity</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr v-for="(alert, index) in alerts.slice(0, numAlerts)" :key="index">
+						<td>{{ alert.countdown }}</td>
+						<td>{{ alert.alertText }}</td>
+					</tr>
+				</tbody>
+			</table>
 		</div>
 	</div>
-	
 </template>
 
 <script>
 export default {
 	name: 'Home',
-	props: ['user', 'username', 'moduleList', 'alertList', 'timetable'],
+	props: ['user', 'username', 'alerts'],
 	components: {},
+	data: function() {
+		return {
+			numAlerts: 5,
+		}
+	},
 	// computed: {
 	// 	exams: function() {
 	// 		let exams = [];
@@ -50,8 +56,4 @@ export default {
 </script>
 
 <style lang="css" scoped>
-#home {
-	margin: 5px;
-}
-
 </style>
