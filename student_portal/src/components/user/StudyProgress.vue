@@ -1,38 +1,56 @@
 <template>
 	<div id='studyProgress'>
-        <div class="row">
-            <div class="col-sm-9 col-md-7 col-lg-5  mx-auto">
-                <Pomodoro/>
-                <h1>My Tasks</h1>
-                
-                <form v-on:submit.prevent="addTask(moduleCode, taskName, deadline, weightage)">
-                    <div class="input-group mb-3">
-                        <select class="custom-select" v-model="moduleCode" required>
-                            <option 
-                                v-for="module in moduleList" 
-                                :key="module.moduleCode"
-                                :value="module.moduleCode"
-                            >{{ module.moduleCode }} - {{module.title}}</option>
-                        </select>
-                        <input type="text" class="form-control" placeholder="Task" v-model="taskName" required>
-                        <input type="number" class="form-control" placeholder="Weightage" v-model.trim.number="weightage" min=0 max=100 required>
-                        <div class="input-group-append">
-                            <span class="input-group-text">%</span>
-                        </div>
+        <h1>My Tasks</h1>
+        <div class="row mb-3">
+            <Pomodoro/>
+        </div>
+        <div class="row mb-3">
+            <form v-on:submit.prevent="addTask(moduleCode, taskName, deadline, weightage)">
+                <div class="input-group mb-3">
+                    <select class="custom-select" v-model="moduleCode" required>
+                        <option 
+                            v-for="module in moduleList" 
+                            :key="module.moduleCode"
+                            :value="module.moduleCode"
+                        >{{ module.moduleCode }} - {{module.title}}</option>
+                    </select>
+                    <input type="text" class="form-control" placeholder="Task" v-model="taskName" required>
+                    <input type="number" class="form-control" placeholder="Weightage" v-model.trim.number="weightage" min=0 max=100 required>
+                    <div class="input-group-append">
+                        <span class="input-group-text">%</span>
                     </div>
-                    <input type="date" class="form-control" placeholder="Due date" v-model="deadline" required>
-                    <br>
-                    <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Add Task</button>
-                </form>
-
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item" v-for="task in taskList" :key="task.moduleCode+task.taskName">
-                        <span>{{ task.moduleCode }}: {{ task.taskName }} ({{ task.weightage }}%) - {{ task.deadline }}</span>
-                        <button class="btn btn-primary" v-on:click="removeTask(task.moduleCode, task.taskName)">Remove</button>
-                    </li>
-                </ul>
-            
-            </div>
+                </div>
+                <input type="date" class="form-control" placeholder="Due date" v-model="deadline" required>
+                <br>
+                <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Add Task</button>
+            </form>
+        </div>
+        <div class="row mb-3">
+            <table class="table">
+                <thead class="thead-light">
+                    <tr>
+                        <th scope="col">Module Code</th>
+                        <th scope="col">Task Name</th>
+                        <th scope="col">Weightage</th>
+                        <th scope="col">Deadline</th>
+                        <th scope="col">Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="task in taskList" :key="task.moduleCode+task.taskName">
+                        <td>{{ task.moduleCode }}</td>
+                        <td>{{ task.taskName }}</td>
+                        <td>{{ task.weightage }}%</td>
+                        <td>{{ task.deadline }}</td>
+                        <td>
+                            <button 
+                                class="btn btn-primary" 
+                                v-on:click="removeTask(task.moduleCode, task.taskName)"
+                            >Done!</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>    
         </div>
 	</div>
 	
@@ -40,13 +58,11 @@
 
 <script>
 import db from '../../firebase.js'
-import Pomodoro from 'vuemodoro'
+    
 export default {
 	name: 'mentalWellbeing',
     props: ['user', 'username', 'moduleList', 'taskList'],
-	components: {
-        Pomodoro,
-    },
+	components: {},
     data() {
         return {
             moduleCode: null,

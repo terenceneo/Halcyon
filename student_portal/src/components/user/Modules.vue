@@ -1,30 +1,26 @@
 <template>
 	<div id='modules'>
-		<div class="col-sm-9 col-md-7 col-lg-5 	mx-auto">
-			<h1>My Modules</h1>
-			<div class="input-group mb-3" v-on:submit.prevent="addModule(moduleCode)">
-				<input type="text" class="form-control" placeholder="Module code">
-				<div class="input-group-append">
-					<button class="btn btn-primary" type="submit">Add Module</button>
-				</div>
+		<h1>My Modules</h1>
+		<div class="input-group mb-3" v-on:submit.prevent="addModule(moduleCode)">
+			<input type="text" class="form-control" placeholder="Module code">
+			<div class="input-group-append">
+				<button class="btn btn-primary" type="submit">Add Module</button>
 			</div>
 		</div>
-		<div class="col-sm-9 col-md-7 col-lg-5 	mx-auto">
-			<table class="table">
-				<thead class="thead-light">
-					<tr>
-						<th scope="col">Module Code</th>
-						<th scope="col">Module Title</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr v-for="mod in moduleList" :key="mod.moduleCode">
-						<td>{{ mod.moduleCode }}</td>
-						<td>{{ mod.title }}</td>
-					</tr>
-				</tbody>
-			</table>
-		</div>
+		<table class="table">
+			<thead class="thead-light">
+				<tr>
+					<th scope="col">Module Code</th>
+					<th scope="col">Module Title</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr v-for="mod in moduleList" :key="mod.moduleCode">
+					<td>{{ mod.moduleCode }}</td>
+					<td>{{ mod.title }}</td>
+				</tr>
+			</tbody>
+		</table>
 	</div>
 </template>
 
