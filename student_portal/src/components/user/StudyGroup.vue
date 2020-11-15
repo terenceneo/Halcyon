@@ -6,7 +6,7 @@
 			<!-- <input type="text" name="Enter your Module Code here"> -->
 		</div>
 		<div class="col-sm-7 col-md-7 col-lg-7 mx-auto">
-			<p>Study groups that you're currently in:</p>
+			<p><b>Study groups that you're currently in:</b></p>
 			<table class="table">
 				<thead class="thead-light">
 					<tr>
@@ -42,19 +42,19 @@
 		</div>
 		<div>
 			<p>
-				Find classmates for module:
-				<select class="custom-select" v-model="moduleCode" @change="getClassmates(moduleCode)">
+				<b>Find classmates for module: </b>
+				<select v-model="moduleCode" @change="getClassmates(moduleCode)">
 					<option 
 						v-for="module in moduleList" 
 						:key="module.moduleCode"
 						:value="module.moduleCode"
 					>{{ module.moduleCode }} - {{module.title}}</option>
 				</select>
-				<ul class="list-group list-group-flush">
+				<ol class="list-group list-group-flush" type="1">
 					<li class="list-group-item" v-for="classmate in classmates" :key="classmate.user">
-						<span>classmate.username</span>
+						<span>{{ classmate.username }}</span>
 					</li>
-				</ul>
+				</ol>
 			</p>
 		</div>
 	</div>
@@ -91,18 +91,18 @@ export default {
 			console.log("called getClassmates for " + moduleCode)
 			this.classmates = []
 			db.collection('user').get().then(querySnapShot => {
-				querySnapShot.forEach(user => {
-					user.modules.forEach(mod => {
+				querySnapShot.forEach(doc => {
+					doc.data().modules.forEach(mod => {
 						if (mod.moduleCode == moduleCode) {
 							this.classmates.push({
-								id: user,
-								username: user.username
+								id: doc.id,
+								username: doc.data().username
 							});
 						}
 					})
 				})
 			});
-			console.log(this.classmates)
+			console.log(this.classmates.length)
 			return;
 		},
 	}
