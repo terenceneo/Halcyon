@@ -1,7 +1,7 @@
 <template>
 	<div id='calendar'>
 		<h1>Upcoming Classes</h1>
-		<div class="agenda">
+		<div class="col-sm-9 col-md-7 col-lg-5 mx-auto agenda">
 			<div class="table-responsive">
 				<table class="table table-condensed table-bordered">
 					<thead>
