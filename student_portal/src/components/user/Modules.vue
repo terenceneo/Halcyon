@@ -16,7 +16,8 @@
 						<td>{{ mod.title }}</td>
 						<td>
 							<button 
-								class="btn btn-primary btn-block" 
+								class="btn btn-primary btn-block"
+								type="button"
 								v-on:click="removeModule(mod.moduleCode)"
 							>Remove</button>
 						</td>

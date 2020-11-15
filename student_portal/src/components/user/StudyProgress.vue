@@ -24,6 +24,7 @@
                         <td>
                             <button 
                                 class="btn btn-primary btn-block" 
+                                type="button"
                                 v-on:click="removeTask(task.moduleCode, task.taskName)"
                             >Done!</button>
                         </td>
