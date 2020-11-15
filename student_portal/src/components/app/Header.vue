@@ -5,6 +5,7 @@
 			:routes="routesLogout" 
 			:style="{'background-color':color}"
 			right=True
+			v-bind:today="today"
 		></AppNav>
 		<AppNav 
 			v-else
@@ -29,7 +30,7 @@ import AppNav from './Nav.vue'
 
 export default {
 	name: 'AppHeader',
-	props: ['user', 'showImage'],
+	props: ['user', 'showImage', 'today'],
 	components: {
 		AppNav,
 	},
