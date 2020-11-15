@@ -61,6 +61,7 @@ export default {
 							username,
 							password,
 							modules: [],
+							tasks: [],
 						})
 						.then(function(docRef) {
 							router.push({path: '/user/'+docRef.id+'/home'});
