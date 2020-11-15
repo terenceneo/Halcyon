@@ -40,7 +40,7 @@
 				</tbody>
 			</table>
 		</div>
-		<div>
+		<div class="col-sm-7 col-md-7 col-lg-7 mx-auto">
 			<p>
 				<b>Find classmates for module: </b>
 				<select v-model="moduleCode" @change="getClassmates(moduleCode)">
@@ -50,11 +50,19 @@
 						:value="module.moduleCode"
 					>{{ module.moduleCode }} - {{module.title}}</option>
 				</select>
-				<ol class="list-group list-group-flush" type="1">
-					<li class="list-group-item" v-for="classmate in classmates" :key="classmate.user">
-						<span>{{ classmate.username }}</span>
-					</li>
-				</ol>
+
+				<table class="table">
+					<thead class="thead-light">
+						<tr>
+							<th scope="col">Username</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr v-for="classmate in classmates" :key="classmate.user">
+							<span>{{ classmate.username }}</span>
+						</tr>
+					</tbody>
+				</table>
 			</p>
 		</div>
 	</div>
