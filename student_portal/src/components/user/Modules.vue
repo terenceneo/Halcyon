@@ -61,7 +61,7 @@ export default {
 			if (this.moduleList.some(entry => entry.moduleCode == moduleCode)) {
 				this.modulePrompt = 'Module code ('+moduleCode+' already added!)' 
 			} else {
-				let url = 'https://api.nusmods.com/v2/2019-2020/modules/'+moduleCode+'.json'
+				let url = 'https://api.nusmods.com/v2/2020-2021/modules/'+moduleCode+'.json'
 				request.get(url, { json: true }, (err, res, body) => {
 					if (res.statusCode != 200) {
 						this.modulePrompt = 'Module code ('+moduleCode+' is not a module!)'
