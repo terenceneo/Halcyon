@@ -61,15 +61,27 @@ export default {
 		}
 	},
 	mounted: function() {
-		db.collection('users').doc(this.$route.params.id)
-			.onSnapshot(doc => {
+		db.collection('user').doc(this.$route.params.id).get()
+			.then(doc => {
 				this.user = this.$route.params.id;
 				this.username = doc.data().username;
 				this.moduleList = doc.data().modules;
+				console.log(this.user);
+				console.log(this.username);
+				console.log(this.moduleList);
 			})
-			.catch(error => {
-				console.log(error);
-			})
+		
+		// db.collection('users').doc(this.$route.params.id)
+		// 	.onSnapshot(doc => {
+		// 		let data = doc.data();
+		// 		this.user = this.$route.params.id;
+		// 		this.username = data.username;
+		// 		this.moduleList = data.modules;
+		// 		console.log('Listener caught updates:')
+		// 		console.log(this.user);
+		// 		console.log(this.username);
+		// 		console.log(this.moduleList);
+		// 	})				
 		return
 	},
 }
