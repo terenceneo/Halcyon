@@ -19,7 +19,6 @@ import AppFooter from './app/Footer.vue'
 import AppNav from './app/Nav.vue'
 import db from '../firebase.js'
 
-
 export default {
 	name: 'User',
 	components: {
@@ -73,14 +72,6 @@ export default {
 			})
 		return
 	},
-	methods: {
-		getUsername() {
-			database.collection("user").doc(this.user).get().then((doc)=>{
-				this.username = doc.data().username;
-			})
-			return this.username;
-		}
-	}
 }
 </script>
 
