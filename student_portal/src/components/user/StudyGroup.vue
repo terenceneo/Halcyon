@@ -90,7 +90,6 @@ export default {
 			let found = this.modchatsList.filter(item => item.module == moduleCode);
 			if (found.length != 0) {
 				this.tele = found[0].telegram;
-				console.log(this.tele);
 				return this.tele;
 			} else {
 				return null;
@@ -114,7 +113,7 @@ export default {
 					})
 				})
 			});
-			console.log(this.classmates.length)
+			console.log(this.classmates.length + " classmates found");
 			return;
 		},
 	}
