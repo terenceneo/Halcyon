@@ -12,34 +12,38 @@
 			<input type="checkbox" id="exams" value="exam" v-model="hiddenAlerts">
 			<label for="exams">Hide exams</label>
 
-			<table class="table">
-				<thead class="thead-light">
-					<tr>
-						<th scope="col">Date</th>
-						<!-- <th scope="col">Raw Date</th> -->
-						<th scope="col">Days Remaining</th>
-						<th scope="col">Activity</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr v-for="(alert, index) in alertsRowSpan.slice(0, numAlerts)" :key="index">
-						<td v-if="alert.showDate" class="agenda-date" :rowspan="rowSpanDate[alert.countdown]">
-							<div class="dayofmonth">{{ future(alert.countdown).getDate() }}</div>
-							<div class="dayofweek">{{ alert.day }}</div>
-							<div class="shortdate text-muted">
-								{{ months[future(alert.countdown).getMonth()] }}, {{ future(alert.countdown).getFullYear() }}
-							</div>
-						</td>
-						<!-- <td>{{ alert.deadline  }}</td> -->
-						<td v-if="alert.showDate" class="agenda-date" :rowspan="rowSpanDate[alert.countdown]">
-							{{ alert.countdown }}
-						</td>
-						<td v-if="alert.type=='exam'" style="color:red">{{ alert.moduleCode }} {{ alert.alertText }}</td>
-						<td v-else-if="alert.type=='task'" style="color:orange">{{ alert.moduleCode }} {{ alert.alertText }}</td>
-						<td v-else>{{ alert.moduleCode }} {{ alert.alertText }}</td>
-					</tr>
-				</tbody>
-			</table>
+			<div class="agenda">
+				<div class="table-responsive">
+					<table class="table table-condensed table-bordered">
+						<thead class="thead-light">
+							<tr>
+								<th scope="col">Date</th>
+								<!-- <th scope="col">Raw Date</th> -->
+								<th scope="col">Days Remaining</th>
+								<th scope="col">Activity</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr v-for="(alert, index) in alertsRowSpan.slice(0, numAlerts)" :key="index">
+								<td v-if="alert.showDate" class="agenda-date" :rowspan="rowSpanDate[alert.countdown]">
+									<div class="dayofmonth">{{ future(alert.countdown).getDate() }}</div>
+									<div class="dayofweek">{{ alert.day }}</div>
+									<div class="shortdate text-muted">
+										{{ months[future(alert.countdown).getMonth()] }}, {{ future(alert.countdown).getFullYear() }}
+									</div>
+								</td>
+								<!-- <td>{{ alert.deadline  }}</td> -->
+								<td v-if="alert.showDate" class="agenda-date" :rowspan="rowSpanDate[alert.countdown]">
+									{{ alert.countdown }}
+								</td>
+								<td v-if="alert.type=='exam'" style="color:red">{{ alert.moduleCode }} {{ alert.alertText }}</td>
+								<td v-else-if="alert.type=='task'" style="color:orange">{{ alert.moduleCode }} {{ alert.alertText }}</td>
+								<td v-else>{{ alert.moduleCode }} {{ alert.alertText }}</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
 		</div>
 	</div>
 </template>
