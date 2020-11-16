@@ -1,7 +1,7 @@
 <template>
 	<div id='calendar'>
 		<h1>Upcoming Classes</h1>
-		<p><i>Note: for testing purposes, we will assume that the sem has not ended and lessons are as timetabled</i></p>
+		<p><i>Note: for testing purposes, we will assume that the semester has not ended and lessons are as timetabled</i></p>
 		<div class="agenda">
 			<div class="table-responsive">
 				<table class="table table-condensed table-bordered">
@@ -86,7 +86,7 @@ export default {
 				}
 			}
 			return timetableRowSpan;
-		}
+		},
 	}
 }
 </script>
