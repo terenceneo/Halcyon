@@ -31,7 +31,9 @@
 							</div>
 						</td>
 						<!-- <td>{{ alert.deadline  }}</td> -->
-						<td>{{ alert.countdown }}</td>
+						<td v-if="alert.showDate" class="agenda-date" :rowspan="rowSpanDate[alert.countdown]">
+							{{ alert.countdown }}
+						</td>
 						<td v-if="alert.type=='exam'" style="color:red">{{ alert.moduleCode }} {{ alert.alertText }}</td>
 						<td v-else-if="alert.type=='task'" style="color:orange">{{ alert.moduleCode }} {{ alert.alertText }}</td>
 						<td v-else>{{ alert.moduleCode }} {{ alert.alertText }}</td>
