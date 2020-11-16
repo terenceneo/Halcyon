@@ -1,6 +1,7 @@
 <template>
 	<div id='calendar'>
 		<h1>Upcoming Classes</h1>
+		<p><i>Note: for testing purposes, we will assume that the sem has not ended and lessons are as timetabled</i></p>
 		<div class="agenda">
 			<div class="table-responsive">
 				<table class="table table-condensed table-bordered">
@@ -9,6 +10,7 @@
 							<th>Date</th>
 							<th>Time</th>
 							<th>Event</th>
+							<th>Venue</th>
 						</tr>
 					</thead>
 
@@ -29,6 +31,9 @@
 								<div class="agenda-event">
 									{{ lesson.moduleCode }} {{ lesson.lessonType }}
 								</div>
+							</td>
+							<td class="agenda-time">
+								{{ lesson.venue }}
 							</td>
 						</tr>
 					</tbody>
