@@ -17,6 +17,8 @@
 					</tr>
 				</tbody>
 			</table>
+			<br>
+			{{ examsList }}
 		</div>
 	</div>
 </template>
@@ -24,11 +26,11 @@
 <script>
 export default {
 	name: 'Home',
-	props: ['user', 'username', 'alerts'],
+	props: ['user', 'username', 'alerts', 'examsList'],
 	components: {},
 	data: function() {
 		return {
-			numAlerts: 5,
+			numAlerts: 50,
 		}
 	},
 	// computed: {

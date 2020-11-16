@@ -3,7 +3,8 @@
 		<AppHeader
 			v-bind:user="user"
 			show-image=True
-			v-bind:today="today">
+			v-bind:today="today"
+			v-bind:semester="semester">
 		</AppHeader>
 		<h1> Welcome {{ username }}!</h1>
 		<AppNav v-bind:routes="routes" center=True></AppNav>
@@ -15,7 +16,9 @@
 				v-bind:task-list="taskList"
 				v-bind:timetable="timetable"
 				v-bind:alerts="alerts"
+				v-bind:examsList="examsList"
 				v-bind:today="today"
+				v-bind:semester="semester"
 			></router-view>
 		</div>
 		<AppFooter v-bind:user="user"></AppFooter>	
@@ -42,6 +45,8 @@ export default {
 			username: null,
 			moduleList: [],
 			taskList: [],
+			examsList: [],
+			semester: 1,
 			routes: [
 				{path: 'home', text: 'Home'},
 				{path: 'calendar', text: 'My Calendar'},
@@ -60,7 +65,7 @@ export default {
 			let lessons = [];
 			this.moduleList.forEach(mod => {
 				mod.semesterData
-					.filter(sem => sem.semester == '2')
+					.filter(sem => sem.semester == this.semester)
 					.forEach(sem => {
 						sem.timetable
 						.filter(cls => cls.classNo == '01'  || cls.classNo == '1')

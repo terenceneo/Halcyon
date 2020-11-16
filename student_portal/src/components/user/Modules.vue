@@ -47,7 +47,7 @@ import db from '../../firebase.js'
 
 export default {
 	name: 'Modules',
-	props: ['user', 'username', 'moduleList', 'alertList'],
+	props: ['user', 'username', 'moduleList', 'examsList', 'semester'],
 	components: {},
 	data: function() {
 		return {
@@ -69,15 +69,19 @@ export default {
 						this.moduleList.push(body);
 						db.collection('user').doc(this.user).update({modules: this.moduleList});
 						// if exam present, push exam to alerts
-						if (body.semesterData.examDate) {
-							this.alertList.push({
+						let semesterData = body.semesterData.filter(sem => sem.semester == this.semester)[0];
+						console.log(semesterData);
+						if (semesterData.examDate) {
+							this.examsList.push({
 								moduleCode: body.moduleCode,
 								title: body.title,
-								date: body.semesterData.examDate,
-								duration: body.semesterData.examDuration,
+								date: semesterData.examDate,
+								duration: semesterData.examDuration,
 								task: "Final Exam"
-							})
-							db.collection('user').doc(this.user).update({modules: this.alertList});
+							});
+							console.log(this.examsList);
+							console.log('added');
+							db.collection('user').doc(this.user).update({modules: this.examsList});
 						}
 						this.modulePrompt = 'Module code'
 					}
@@ -90,9 +94,9 @@ export default {
 			// remove module information
 			this.moduleList = this.moduleList.filter(entry => entry.moduleCode!=moduleCode)
 			db.collection('user').doc(this.user).update({modules: this.moduleList});
-			// remove alerts
-			this.alertList = this.alertList.filter(entry => entry.moduleCode!=moduleCode)
-			db.collection('user').doc(this.user).update({modules: this.alertList});
+			// remove exams
+			this.examsList = this.examsList.filter(entry => entry.moduleCode!=moduleCode)
+			db.collection('user').doc(this.user).update({modules: this.examsList});
 			return
 		},
 	},

@@ -17,7 +17,7 @@
 			</li>
 		</ul>
 		<ul v-else-if="right" class="nav justify-content-end">
-			<li align="left">{{ today }}</li>
+			<li align="left">Semester {{ semester }}, {{ today }}</li>
 			<li class="nav-item" v-for="route in routes" :key="route.path">
 				<router-link 
 					:to="route.path"
@@ -31,7 +31,7 @@
 <script>
 export default {
   name: 'AppNav',
-  props: ['routes', 'left', 'center', 'right', 'today'],
+  props: ['routes', 'left', 'center', 'right', 'today', 'semester'],
   components: {},
 }
 </script>
