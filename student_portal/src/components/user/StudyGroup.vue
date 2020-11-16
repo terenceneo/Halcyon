@@ -114,7 +114,7 @@ export default {
 					})
 				})
 			});
-			console.log(this.classmates.length)
+			console.log(this.classmates.length + " classmates found");
 			return;
 		},
 	}

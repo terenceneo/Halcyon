@@ -6,6 +6,7 @@
 			:style="{'background-color':color}"
 			right=True
 			v-bind:today="today"
+			v-bind:semester="semester"
 		></AppNav>
 		<AppNav 
 			v-else
@@ -30,7 +31,7 @@ import AppNav from './Nav.vue'
 
 export default {
 	name: 'AppHeader',
-	props: ['user', 'showImage', 'today'],
+	props: ['user', 'showImage', 'today', 'semester'],
 	components: {
 		AppNav,
 	},
