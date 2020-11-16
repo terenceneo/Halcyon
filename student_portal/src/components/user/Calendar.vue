@@ -17,12 +17,14 @@
 					<tbody v-for="lesson in timetable" :key="lesson.moduleCode">
 						<tr>
 							<!-- Note: edit rowspan for multiple items in a day -->
-							<td class="agenda-date" rowspan="1">
+							<td v-if="lesson.countdown != prevCountdown" class="agenda-date" rowspan="1">
 								<div class="dayofmonth">{{ future(lesson.countdown).getDate() }}</div>
 								<div class="dayofweek">{{ lesson.day }}</div>
 								<div class="shortdate text-muted">
 									{{ months[future(lesson.countdown).getMonth()] }}, {{ future(lesson.countdown).getFullYear() }}
 								</div>
+							</td>
+							<td v-else>
 							</td>
 							<td class="agenda-time">
 								{{ lesson.startTime }} - {{ lesson.endTime }}
@@ -51,14 +53,16 @@ export default {
 	data: function() {
 		return {
 			months: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+			prevCountdown: null, // to prevent same dates from repeating
 		}
 	},
 	methods: {
 		future: function(incr) {
 			let future = new Date()
 			future.setDate(this.today.getDate() + incr);
+			this.prevCountdown = incr; // to prevent same dates from repeating
 			return future;
-		}
+		},
 	},
 }
 </script>
