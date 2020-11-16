@@ -10,12 +10,12 @@
 			<form class="form-signin" v-on:submit.prevent="login(username, password)">
 				<div class="form-label-group">
 					<label for="user">Username</label>
-					<input type="text" id="user" class="form-control" v-model="username" required autofocus>
+					<input type="text" id="user" class="form-control" :placeholder="userPrompt" v-model="username" required autofocus>
 				</div>
 				<br>
 				<div class="form-label-group">
 					<label for="pass">Password</label>
-					<input type="password" id="pass" class="form-control" v-model="password" required>
+					<input type="password" id="pass" class="form-control" :placeholder="passPrompt" v-model="password" required>
 				</div>
 				<br>
 				<button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Sign in</button>
@@ -44,6 +44,8 @@ export default {
 		return {
 			username: null,
 			password: null,
+			userPrompt: "Username",
+			passPrompt: "Password",
 		}
 	},
 	methods: {
@@ -63,7 +65,10 @@ export default {
 						});
 					} else {
 						// Handle invalid login here
-						console.log('invalid credentials? ', username, ' and ', password);
+						this.username = null;
+						this.password = null;
+						this.userPrompt = "Username (Enter a valid username and password)";
+						this.passPrompt ="Password (Enter a valid username and password)";
 					}
 				})
 			return
