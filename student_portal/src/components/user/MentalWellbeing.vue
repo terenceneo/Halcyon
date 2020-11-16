@@ -2,7 +2,7 @@
 	<div id='mentalWellbeing'>
 		<h1>Feeling stressed during the pandemic?</h1>
 		
-		<img src="@/assets/coronavirus-anxiety.jpg">
+		<img src="@/assets/covid-anxiety.jpg">
 
 		<h2>Check out our selection of articles below.</h2>
 	<div class="articles">
