@@ -3,18 +3,38 @@
 		<h1>Home Page</h1>
 		<div>
 			<h2>Alerts</h2>
-			<p><i>Note: for testing purposes, we will assume that the sem has not ended and lessons are as timetabled</i></p>
+			<p>Number of alerts to show: <input type="number" v-model.trim.number="numAlerts" min=0 max=10></p>
+
+			<input type="checkbox" id="lessons" value="lesson" v-model="hiddenAlerts">
+			<label for="lessons">Hide lessons </label>
+			<input type="checkbox" id="tasks" value="task" v-model="hiddenAlerts">
+			<label for="tasks">Hide tasks </label>
+			<input type="checkbox" id="exams" value="exam" v-model="hiddenAlerts">
+			<label for="exams">Hide exams</label>
+
 			<table class="table">
 				<thead class="thead-light">
 					<tr>
+						<th scope="col">Date</th>
+						<!-- <th scope="col">Raw Date</th> -->
 						<th scope="col">Days Remaining</th>
 						<th scope="col">Activity</th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr v-for="(alert, index) in alerts.slice(0, numAlerts)" :key="index">
+						<td class="agenda-date" rowspan="1">
+							<div class="dayofmonth">{{ future(alert.countdown).getDate() }}</div>
+							<div class="dayofweek">{{ alert.day }}</div>
+							<div class="shortdate text-muted">
+								{{ months[future(alert.countdown).getMonth()] }}, {{ future(alert.countdown).getFullYear() }}
+							</div>
+						</td>
+						<!-- <td>{{ alert.deadline  }}</td> -->
 						<td>{{ alert.countdown }}</td>
-						<td>{{ alert.alertText }}</td>
+						<td v-if="alert.type=='exam'" style="color:red">{{ alert.moduleCode }} {{ alert.alertText }}</td>
+						<td v-else-if="alert.type=='task'" style="color:orange">{{ alert.moduleCode }} {{ alert.alertText }}</td>
+						<td v-else>{{ alert.moduleCode }} {{ alert.alertText }}</td>
 					</tr>
 				</tbody>
 			</table>
@@ -25,35 +45,59 @@
 <script>
 export default {
 	name: 'Home',
-	props: ['user', 'username', 'alerts'],
+	props: ['user', 'username', 'examsList', 'timetable', 'tasks', 'today'],
 	components: {},
 	data: function() {
 		return {
 			numAlerts: 5,
+			hiddenAlerts: [],
+			months: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
 		}
 	},
-	// computed: {
-	// 	exams: function() {
-	// 		let exams = [];
-	// 		this.moduleList.forEach(mod => {
-	// 			mod.semesterData
-	// 				.filter(sem => sem.semester == '2')
-	// 				.filter(sem => sem.examDate != null)
-	// 				.forEach(sem => {
-	// 					exams.push({
-	// 						moduleCode: mod.moduleCode,
-	// 						title: mod.title,
-	// 						examDate: sem.examDate,
-	// 						examDuration: sem.examDuration,
-	// 						type: "exam"
-	// 					});
-	// 				});
-	// 			});
-	// 		return exams;
-	// 	},
-	// },
+	methods: {
+		future: function(incr) {
+			let future = new Date()
+			future.setDate(this.today.getDate() + incr);
+			return future;
+		},
+	},
+	computed: {
+		alerts: function() {
+			// Sorts user's lessons and assignments by countdown
+			return [...this.examsList, ...this.timetable, ...this.tasks]
+			.filter(alert => !this.hiddenAlerts.includes(alert.type))
+			.sort((alert1, alert2) => alert1.countdown - alert2.countdown);
+		},
+	},
 }
 </script>
 
 <style lang="css" scoped>
+.agenda {  }
+
+/* Dates */
+.agenda .agenda-date { width: 170px; }
+.agenda .agenda-date .dayofmonth {
+  width: 40px;
+  font-size: 36px;
+  line-height: 36px;
+  float: left;
+  text-align: right;
+  margin-right: 10px; 
+}
+.agenda .agenda-date .shortdate {
+  font-size: 0.75em; 
+}
+
+
+/* Times */
+.agenda .agenda-time { width: 140px; } 
+
+/* Events */
+.agenda .agenda-events {  } 
+.agenda .agenda-events .agenda-event {  } 
+
+@media (max-width: 767px) {
+    
+}
 </style>

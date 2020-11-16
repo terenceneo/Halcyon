@@ -31,7 +31,7 @@
 <script>
 export default {
   name: 'AppNav',
-  props: ['routes', 'left', 'center', 'right', 'today'],
+  props: ['routes', 'left', 'center', 'right', 'today', 'semester'],
   components: {},
 }
 </script>
