@@ -41,21 +41,27 @@ The application will have a home page for alerts, to help students keep track of
 
 ### Images of the site
 Home Page
+
 ![Home Page](assets/NP.PNG)
 
 Calendar Page
+
 ![My Calendar](assets/MC.PNG)
 
 Modules Page
+
 ![My Modules](assets/MM.PNG)
 
 Study Group Page
+
 ![Study Group](assets/SG.PNG)
 
 Study Progress Page
+
 ![Study Progress](assets/SP.PNG)
 
 Mental Wellbeing Page
+
 ![Mental Wellbeing](assets/MW.PNG)
 
 ### Refernces 
