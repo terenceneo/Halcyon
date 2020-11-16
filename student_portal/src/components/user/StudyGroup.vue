@@ -78,7 +78,6 @@ export default {
 	data: function() {
 		return {
 			modchatsList: modchats,
-			// tele: null,
 			classmates: [],
 			moduleCode: null,
 			title: "Module not yet selected, please choose a module above",
@@ -89,8 +88,6 @@ export default {
 			// moduleCode = "AH2101"; // to test with a module found in list
 			let found = this.modchatsList.filter(item => item.module == moduleCode);
 			if (found.length != 0) {
-				// this.tele = found[0].telegram;
-				// console.log(this.tele);
 				return found[0].telegram;
 			} else {
 				return null;
