@@ -68,7 +68,8 @@ export default {
 					} else {
 						this.moduleList.push(body);
 						db.collection('user').doc(this.user).update({modules: this.moduleList});
-						if (body.semesterData.examDate) { // if exam present, push exam to alerts
+						// if exam present, push exam to alerts
+						if (body.semesterData.examDate) {
 							this.alertList.push({
 								moduleCode: body.moduleCode,
 								title: body.title,
