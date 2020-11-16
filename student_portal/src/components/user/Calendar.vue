@@ -14,8 +14,8 @@
 						</tr>
 					</thead>
 
-					<tbody v-for="(lesson, index) in timetableRowSpan" :key="index">
-						<tr>
+					<tbody>
+						<tr v-for="(lesson, index) in timetableRowSpan" :key="index">
 							<!-- Note: edit rowspan for multiple items in a day -->
 							<td v-if="lesson.showDate" class="agenda-date" :rowspan="rowSpanDate[lesson.countdown]">
 								<div class="dayofmonth">{{ future(lesson.countdown).getDate() }}</div>
