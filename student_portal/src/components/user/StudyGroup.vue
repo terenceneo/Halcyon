@@ -1,10 +1,10 @@
 <template>
 	<div id='studyGroup'>
 		<h1>Study Groups</h1>
-		<div class="row bm-3">
+		<div class="row bm-3 justify-content-center">
 			<p>Feeling lost and alone during this period? Fear not! Make new friends by joining a study group.</p>
 		</div>
-		<div class="row bm-3">
+		<div class="row bm-3 justify-content-center">
 			<p><b>Study groups that you're currently in:</b></p>
 			<table class="table">
 				<thead class="thead-light">
