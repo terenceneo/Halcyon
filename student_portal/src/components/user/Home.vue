@@ -7,18 +7,23 @@
 				<thead class="thead-light">
 					<tr>
 						<th scope="col">Days Remaining</th>
+						<th scope="col">Date</th>
 						<th scope="col">Activity</th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr v-for="(alert, index) in alerts.slice(0, numAlerts)" :key="index">
 						<td>{{ alert.countdown }}</td>
-						<td>{{ alert.alertText }}</td>
+						<td>{{ alert.deadline  }}</td>
+						<td>{{ alert.moduleCode }} {{ alert.alertText }}</td>
 					</tr>
 				</tbody>
 			</table>
 			<br>
 			{{ examsList }}
+			<br>
+			<br>
+			{{alerts}}
 		</div>
 	</div>
 </template>
@@ -33,26 +38,6 @@ export default {
 			numAlerts: 50,
 		}
 	},
-	// computed: {
-	// 	exams: function() {
-	// 		let exams = [];
-	// 		this.moduleList.forEach(mod => {
-	// 			mod.semesterData
-	// 				.filter(sem => sem.semester == '2')
-	// 				.filter(sem => sem.examDate != null)
-	// 				.forEach(sem => {
-	// 					exams.push({
-	// 						moduleCode: mod.moduleCode,
-	// 						title: mod.title,
-	// 						examDate: sem.examDate,
-	// 						examDuration: sem.examDuration,
-	// 						type: "exam"
-	// 					});
-	// 				});
-	// 			});
-	// 		return exams;
-	// 	},
-	// },
 }
 </script>
 

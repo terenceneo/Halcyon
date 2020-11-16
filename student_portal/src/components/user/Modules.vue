@@ -70,21 +70,25 @@ export default {
 					} else {
 						this.moduleList.push(body);
 						db.collection('user').doc(this.user).update({modules: this.moduleList});
-						// if exam present, push exam to alerts
-						let semesterData = body.semesterData.filter(sem => sem.semester == this.semester)[0];
-						console.log(semesterData);
-						if (semesterData.examDate) {
-							this.examsList.push({
-								moduleCode: body.moduleCode,
-								title: body.title,
-								date: semesterData.examDate,
-								duration: semesterData.examDuration,
-								task: "Final Exam"
-							});
-							console.log(this.examsList);
-							console.log('added');
-							db.collection('user').doc(this.user).update({modules: this.examsList});
-						}
+						// // if exam present, push exam to alerts
+						// let semesterData = body.semesterData[0];
+						// console.log("before");
+						// console.log(semesterData);
+						// // semesterData = semesterData.filter(sem => sem.semester == this.semester)[0];
+						// console.log("after");
+						// console.log(semesterData);
+						// if (semesterData.examDate) {
+						// 	this.examsList.push({
+						// 		moduleCode: body.moduleCode,
+						// 		title: body.title,
+						// 		date: semesterData.examDate,
+						// 		duration: semesterData.examDuration,
+						// 		task: "Final Exam"
+						// 	});
+						// 	console.log(this.examsList);
+						// 	console.log('added');
+						// 	db.collection('user').doc(this.user).update({modules: this.examsList});
+						// }
 						this.modulePrompt = 'Module code'
 					}
 				});
@@ -96,9 +100,9 @@ export default {
 			// remove module information
 			this.moduleList = this.moduleList.filter(entry => entry.moduleCode!=moduleCode)
 			db.collection('user').doc(this.user).update({modules: this.moduleList});
-			// remove exams
-			this.examsList = this.examsList.filter(entry => entry.moduleCode!=moduleCode)
-			db.collection('user').doc(this.user).update({modules: this.examsList});
+			// // remove exams
+			// this.examsList = this.examsList.filter(entry => entry.moduleCode!=moduleCode)
+			// db.collection('user').doc(this.user).update({modules: this.examsList});
 			return
 		},
 	},

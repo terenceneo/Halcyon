@@ -45,7 +45,6 @@ export default {
 			username: null,
 			moduleList: [],
 			taskList: [],
-			examsList: [],
 			semester: 1,
 			routes: [
 				{path: 'home', text: 'Home'},
@@ -72,9 +71,10 @@ export default {
 						.forEach(cls => {
 							lessons.push({
 								countdown: (days.indexOf(cls.day) - today + 7) % 7,
-								alertText: mod.moduleCode+' '+cls.lessonType,
+								alertText: cls.lessonType,
 								moduleCode: mod.moduleCode,
 								title: mod.title,
+								type: 'lesson',
 								...cls,
 							});
 						});
@@ -93,16 +93,38 @@ export default {
 		tasks: function() {
 			return this.taskList.map(task => {
 				return {
-					countdown: Math.floor((new Date(task.deadline) - this.today) / (1000*60*60*24)),
-					alertText: task.moduleCode+' '+task.taskName+' deadline',
+					countdown: Math.floor((new Date(task.deadline) - this.today) / (1000*60*60*24)) + 1,
+					alertText: task.taskName+' deadline',
+					type: "task",
 					...task,
 				}
 			})
 		},
 		alerts: function() {
 			// Sorts user's lessons and assignments by countdown
-			return [...this.timetable, ...this.tasks].sort((alert1, alert2) => alert1.countdown - alert2.countdown);
-		}
+			return [...this.examsList, ...this.timetable, ...this.tasks].sort((alert1, alert2) => alert1.countdown - alert2.countdown);
+		},
+		examsList: function() {
+			let exams = [];
+			this.moduleList.forEach(mod => {
+				mod.semesterData
+					.filter(sem => sem.semester == this.semester)
+					.filter(sem => sem.examDate != null)
+					.forEach(sem => {
+						exams.push({
+							moduleCode: mod.moduleCode,
+							title: mod.title,
+							deadline: new Date(sem.examDate),
+							countdown: Math.floor((new Date(sem.examDate) - this.today) / (1000*60*60*24)) + 1,
+							examDuration: sem.examDuration,
+							alertText: "Final Exam",
+							type: "exam"
+						});
+					});
+				});
+			
+			return exams;
+		},
 	},
 	methods: {
 		docToData(doc) {
