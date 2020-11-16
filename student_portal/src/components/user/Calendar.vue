@@ -14,7 +14,7 @@
 						</tr>
 					</thead>
 
-					<tbody v-for="lesson in timetable" :key="lesson.id">
+					<tbody v-for="(lesson, index) in timetable" :key="index">
 						<tr>
 							<!-- Note: edit rowspan for multiple items in a day -->
 							<td v-if="lesson.countdown != prevCountdown" class="agenda-date" rowspan="1">
