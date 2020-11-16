@@ -34,4 +34,21 @@ export default {
 </script>
 
 <style lang="css" scoped>
+	articles {
+		width: 100%;
+		margin-bottom: 100px
+	}
+	figure {
+		display: inline-block;
+	}
+	.articles figure img{
+		width: 200px;
+		height: 200px;
+		margin: 30px 50px;
+		display: inline-block;
+		border: 2px solid #555;
+	}
+	img{
+		margin: 30px;
+	}
 </style>
