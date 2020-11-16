@@ -3,6 +3,7 @@
 		<h1>Home Page</h1>
 		<div>
 			<h2>Alerts</h2>
+			<p>Number of alerts to show: <input type="number" v-model.trim.number="numAlerts" min=0 max=10></p>
 			<table class="table">
 				<thead class="thead-light">
 					<tr>
@@ -35,7 +36,7 @@ export default {
 	components: {},
 	data: function() {
 		return {
-			numAlerts: 50,
+			numAlerts: 5,
 		}
 	},
 }
