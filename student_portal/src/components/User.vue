@@ -7,6 +7,7 @@
 			v-bind:semester="semester">
 		</AppHeader>
 		<h1> Welcome {{ username }}!</h1>
+		<p> Semester {{ semester }} </p>
 		<AppNav v-bind:routes="routes" center=True></AppNav>
 		<div class="col-sm-9 col-md-9 col-lg-7 mx-auto">
 			<router-view 
