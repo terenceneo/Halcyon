@@ -41,11 +41,11 @@ The application will have a home page for alerts, to help students keep track of
 
 ### Images of the site
 ![Home Page](assets/NP.PNG)
-![My Calendar](assets/MC.png)
-![My Modules](assets/MM.png)
-![Study Group](assets/SG.png)
-![Study Progress](assets/SP.png)
-![Mental Wellbeing](assets/MW.png)
+![My Calendar](assets/MC.PNG)
+![My Modules](assets/MM.PNG)
+![Study Group](assets/SG.PNG)
+![Study Progress](assets/SP.PNG)
+![Mental Wellbeing](assets/MW.PNG)
 
 ### Refernces 
 * NUSMods API for accessing NUS Registrar Office’s module database: https://api.nusmods.com/v2/
