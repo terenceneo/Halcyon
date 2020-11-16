@@ -62,7 +62,9 @@ export default {
 				mod.semesterData
 					.filter(sem => sem.semester == '2')
 					.forEach(sem => {
-						sem.timetable.forEach(cls => {
+						sem.timetable
+						.filter(cls => cls.classNo == '01'  || cls.classNo == '1')
+						.forEach(cls => {
 							lessons.push({
 								countdown: (days.indexOf(cls.day) - today + 7) % 7,
 								alertText: mod.moduleCode+' '+cls.lessonType,
