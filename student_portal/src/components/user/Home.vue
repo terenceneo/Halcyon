@@ -3,7 +3,6 @@
 		<h1>Home Page</h1>
 		<div>
 			<h2>Alerts</h2>
-			<p><i>Note: for testing purposes, we will assume that the sem has not ended and lessons are as timetabled</i></p>
 			<table class="table">
 				<thead class="thead-light">
 					<tr>

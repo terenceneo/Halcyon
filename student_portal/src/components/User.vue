@@ -75,6 +75,14 @@ export default {
 						});
 					});
 				});
+			// sorting of lessons by date then time
+			lessons = lessons.sort(function(a,b) {
+				if (a.countdown < b.countdown) return -1;
+				else if (a.countdown > b.countdown) return 1;
+				else if (a.startTime < b.startTime) return -1;
+				else if (a.startTime > b.startTime) return 1;
+				else return 0;
+			});
 			return lessons;
 		},
 		tasks: function() {
