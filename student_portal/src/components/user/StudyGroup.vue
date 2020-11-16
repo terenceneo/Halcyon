@@ -19,7 +19,7 @@
 						<th scope="row" v-on:click="getClassmates(mod.moduleCode)">{{ mod.moduleCode }} {{ mod.title }}</th>
 						<td> 
 							<button class="btn btn-light" v-if="getTele(mod.moduleCode) != null">
-								<a v-bind:href = "tele" target = "_blank">
+								<a v-bind:href = "getTele(mod.moduleCode)" target = "_blank">
 									<img v-img :src="require('@/assets/telegram.png')" width="25"/>
 									join chat
 								</a>
@@ -78,7 +78,7 @@ export default {
 	data: function() {
 		return {
 			modchatsList: modchats,
-			tele: null,
+			// tele: null,
 			classmates: [],
 			moduleCode: null,
 			title: "Module not yet selected, please choose a module above",
@@ -89,8 +89,9 @@ export default {
 			// moduleCode = "AH2101"; // to test with a module found in list
 			let found = this.modchatsList.filter(item => item.module == moduleCode);
 			if (found.length != 0) {
-				this.tele = found[0].telegram;
-				return this.tele;
+				// this.tele = found[0].telegram;
+				// console.log(this.tele);
+				return found[0].telegram;
 			} else {
 				return null;
 			}
