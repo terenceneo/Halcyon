@@ -11,9 +11,6 @@
 			<label for="tasks">Hide tasks </label>
 			<input type="checkbox" id="exams" value="exam" v-model="hiddenAlerts">
 			<label for="exams">Hide exams</label>
-			<br>
-			<br>
-			<span>{{ hiddenAlerts }}</span>
 
 			<table class="table">
 				<thead class="thead-light">
