@@ -40,6 +40,7 @@ export default {
 	},
 	data: function() {
 		return {
+			days: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
 			today: new Date(),
 			user: this.$route.params.id,
 			username: null,
@@ -59,7 +60,6 @@ export default {
 	computed: {
 		timetable: function() {
 			// Parses lessons from moduleList in a rendering friendly format
-			let days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 			let today = this.today.getDay();
 			let lessons = [];
 			this.moduleList.forEach(mod => {
@@ -70,7 +70,7 @@ export default {
 						.filter(cls => cls.classNo == '01'  || cls.classNo == '1')
 						.forEach(cls => {
 							lessons.push({
-								countdown: (days.indexOf(cls.day) - today + 7) % 7,
+								countdown: (this.days.indexOf(cls.day) - today + 7) % 7,
 								alertText: cls.lessonType,
 								moduleCode: mod.moduleCode,
 								title: mod.title,
@@ -94,6 +94,7 @@ export default {
 			return this.taskList.map(task => {
 				return {
 					countdown: Math.floor((new Date(task.deadline) - this.today) / (1000*60*60*24)) + 1,
+					day: this.days[new Date(task.deadline).getDay()],
 					alertText: task.taskName+' deadline',
 					type: "task",
 					...task,
@@ -115,6 +116,7 @@ export default {
 							moduleCode: mod.moduleCode,
 							title: mod.title,
 							deadline: new Date(sem.examDate),
+							day: this.days[new Date(sem.examDate).getDay()],
 							countdown: Math.floor((new Date(sem.examDate) - this.today) / (1000*60*60*24)) + 1,
 							examDuration: sem.examDuration,
 							alertText: "Final Exam",
