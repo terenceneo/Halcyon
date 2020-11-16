@@ -1,9 +1,8 @@
 <template>
 	<div id='studyProgress'>
+        <Pomodoro/>
         <h1>My Tasks</h1>
-        <!-- <div class="row mb-3">
-            <Pomodoro/>
-        </div> -->
+        
         <form class="row mb-3" v-on:submit.prevent="addTask(moduleCode, taskName, deadline, weightage)">
             <table class="table">
                 <thead class="thead-light">
@@ -64,11 +63,13 @@
 
 <script>
 import db from '../../firebase.js'
-
+import Pomodoro from 'vuemodoro'
 export default {
 	name: 'mentalWellbeing',
     props: ['user', 'username', 'moduleList', 'taskList'],
-	components: {},
+	components: {
+        Pomodoro,
+    },
     data() {
         return {
             taskPrompt: 'Task',
