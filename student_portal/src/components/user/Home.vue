@@ -22,8 +22,8 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr v-for="(alert, index) in alerts.slice(0, numAlerts)" :key="index">
-						<td class="agenda-date" rowspan="1">
+					<tr v-for="(alert, index) in alertsRowSpan.slice(0, numAlerts)" :key="index">
+						<td v-if="alert.showDate" class="agenda-date" :rowspan="rowSpanDate[alert.countdown]">
 							<div class="dayofmonth">{{ future(alert.countdown).getDate() }}</div>
 							<div class="dayofweek">{{ alert.day }}</div>
 							<div class="shortdate text-muted">
@@ -68,6 +68,30 @@ export default {
 			.filter(alert => !this.hiddenAlerts.includes(alert.type))
 			.sort((alert1, alert2) => alert1.countdown - alert2.countdown);
 		},
+		rowSpanDate: function() {
+			let rowSpans = {};
+			for (let index in this.alerts.slice(0, this.numAlerts)) {
+				if (this.alerts[index].countdown in rowSpans) {
+					rowSpans[this.alerts[index].countdown]++;
+				} else {
+					rowSpans[this.alerts[index].countdown] = 1;
+				}
+			}
+			return rowSpans;
+		},
+		alertsRowSpan: function() {
+			let prevCountdown = null;
+			let alertsRowSpan = this.alerts;
+			for (let index in alertsRowSpan) {
+				if (alertsRowSpan[index].countdown == prevCountdown) { // seen date before
+					alertsRowSpan[index]['showDate'] = false;
+				} else {
+					alertsRowSpan[index]['showDate'] = true;
+					prevCountdown = alertsRowSpan[index].countdown;
+				}
+			}
+			return alertsRowSpan;
+		}
 	},
 }
 </script>
