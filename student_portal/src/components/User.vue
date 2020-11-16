@@ -15,8 +15,8 @@
 				v-bind:module-list="moduleList"
 				v-bind:task-list="taskList"
 				v-bind:timetable="timetable"
-				v-bind:alerts="alerts"
 				v-bind:examsList="examsList"
+				v-bind:tasks="tasks"
 				v-bind:today="today"
 				v-bind:semester="semester"
 			></router-view>
@@ -100,10 +100,6 @@ export default {
 					...task,
 				}
 			})
-		},
-		alerts: function() {
-			// Sorts user's lessons and assignments by countdown
-			return [...this.examsList, ...this.timetable, ...this.tasks].sort((alert1, alert2) => alert1.countdown - alert2.countdown);
 		},
 		examsList: function() {
 			let exams = [];

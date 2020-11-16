@@ -4,7 +4,17 @@
 		<div>
 			<h2>Alerts</h2>
 			<p>Number of alerts to show: <input type="number" v-model.trim.number="numAlerts" min=0 max=10></p>
-			<input type="checkbox" label="Hide lessons">
+
+			<input type="checkbox" id="lessons" value="lesson" v-model="hiddenAlerts">
+			<label for="lessons">Hide lessons </label>
+			<input type="checkbox" id="tasks" value="task" v-model="hiddenAlerts">
+			<label for="tasks">Hide tasks </label>
+			<input type="checkbox" id="exams" value="exam" v-model="hiddenAlerts">
+			<label for="exams">Hide exams</label>
+			<br>
+			<br>
+			<span>{{ hiddenAlerts }}</span>
+
 			<table class="table">
 				<thead class="thead-light">
 					<tr>
@@ -38,11 +48,12 @@
 <script>
 export default {
 	name: 'Home',
-	props: ['user', 'username', 'alerts', 'examsList', 'today'],
+	props: ['user', 'username', 'examsList', 'timetable', 'tasks', 'today'],
 	components: {},
 	data: function() {
 		return {
 			numAlerts: 5,
+			hiddenAlerts: [],
 			months: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
 		}
 	},
@@ -51,6 +62,14 @@ export default {
 			let future = new Date()
 			future.setDate(this.today.getDate() + incr);
 			return future;
+		},
+	},
+	computed: {
+		alerts: function() {
+			// Sorts user's lessons and assignments by countdown
+			return [...this.examsList, ...this.timetable, ...this.tasks]
+			.filter(alert => !this.hiddenAlerts.includes(alert.type))
+			.sort((alert1, alert2) => alert1.countdown - alert2.countdown);
 		},
 	},
 }
