@@ -4,6 +4,7 @@
 		<div>
 			<h2>Alerts</h2>
 			<p>Number of alerts to show: <input type="number" v-model.trim.number="numAlerts" min=0 max=10></p>
+			<input type="checkbox" label="Hide lessons">
 			<table class="table">
 				<thead class="thead-light">
 					<tr>
@@ -24,7 +25,9 @@
 						</td>
 						<!-- <td>{{ alert.deadline  }}</td> -->
 						<td>{{ alert.countdown }}</td>
-						<td>{{ alert.moduleCode }} {{ alert.alertText }}</td>
+						<td v-if="alert.type=='exam'" style="color:red">{{ alert.moduleCode }} {{ alert.alertText }}</td>
+						<td v-else-if="alert.type=='task'" style="color:orange">{{ alert.moduleCode }} {{ alert.alertText }}</td>
+						<td v-else>{{ alert.moduleCode }} {{ alert.alertText }}</td>
 					</tr>
 				</tbody>
 			</table>
