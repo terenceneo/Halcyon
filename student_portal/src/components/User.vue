@@ -8,7 +8,7 @@
 		</AppHeader>
 		<h1> Welcome {{ username }}!</h1>
 		<AppNav v-bind:routes="routes" center=True></AppNav>
-		<div class="col-sm-9 col-md-7 col-lg-7 mx-auto">
+		<div class="col-sm-9 col-md-9 col-lg-7 mx-auto">
 			<router-view 
 				v-bind:user="user"
 				v-bind:username="username"
