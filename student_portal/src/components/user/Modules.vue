@@ -2,41 +2,43 @@
 	<div id='modules'>
 		<h1>My Modules</h1>
 		<form class="row mb-3" v-on:submit.prevent="addModule(moduleCode)">
-			<table class="table">
-				<thead class="thead-light">
-					<tr>
-						<th scope="col">Module Code</th>
-						<th scope="col">Module Title</th>
-						<th scope="col">Module Title</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr v-for="mod in moduleList" :key="mod.moduleCode">
-						<td>{{ mod.moduleCode }}</td>
-						<td>{{ mod.title }}</td>
-						<td>
-							<button 
-								class="btn btn-primary btn-block"
-								type="button"
-								v-on:click="removeModule(mod.moduleCode)"
-							>Remove</button>
-						</td>
-					</tr>
-					<tr>
-						<td colspan=2>
-							<input 
-								class="form-control" 
-								type="text" 
-								v-model.trim="moduleCode" 
-								:placeholder="modulePrompt" 
-								required>
-						</td>
-						<td>		
-							<button class="btn btn-primary btn-block" type="submit">Add Module</button>
-						</td>
-					</tr>
-				</tbody>
-			</table>
+            <div class="table-responsive">
+				<table class="table">
+					<thead class="thead-light">
+						<tr>
+							<th scope="col">Module Code</th>
+							<th scope="col">Module Title</th>
+							<th scope="col">Module Title</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr v-for="mod in moduleList" :key="mod.moduleCode">
+							<td>{{ mod.moduleCode }}</td>
+							<td>{{ mod.title }}</td>
+							<td>
+								<button 
+									class="btn btn-primary btn-block"
+									type="button"
+									v-on:click="removeModule(mod.moduleCode)"
+								>Remove</button>
+							</td>
+						</tr>
+						<tr>
+							<td colspan=2>
+								<input 
+									class="form-control" 
+									type="text" 
+									v-model.trim="moduleCode" 
+									:placeholder="modulePrompt" 
+									required>
+							</td>
+							<td>		
+								<button class="btn btn-primary btn-block" type="submit">Add Module</button>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
 		</form>
 	</div>
 </template>
