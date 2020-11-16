@@ -17,7 +17,7 @@
 			</li>
 		</ul>
 		<ul v-else-if="right" class="nav justify-content-end">
-			<p align="left">{{ today }}</p>
+			<li align="left">{{ today }}</li>
 			<li class="nav-item" v-for="route in routes" :key="route.path">
 				<router-link 
 					:to="route.path"

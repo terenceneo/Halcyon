@@ -7,14 +7,17 @@
 		</AppHeader>
 		<h1> Welcome {{ username }}!</h1>
 		<AppNav v-bind:routes="routes" center=True></AppNav>
-		<router-view 
-			v-bind:user="user"
-			v-bind:username="username"
-			v-bind:module-list="moduleList"
-			v-bind:alert-list="alertList"
-			v-bind:timetable="timetable"
-			v-bind:today="today"
-		></router-view>
+		<div class="col-sm-9 col-md-7 col-lg-7 mx-auto">
+			<router-view 
+				v-bind:user="user"
+				v-bind:username="username"
+				v-bind:module-list="moduleList"
+				v-bind:task-list="taskList"
+				v-bind:timetable="timetable"
+				v-bind:alerts="alerts"
+				v-bind:today="today"
+			></router-view>
+		</div>
 		<AppFooter v-bind:user="user"></AppFooter>	
 	</div>
 </template>
@@ -34,11 +37,11 @@ export default {
 	},
 	data: function() {
 		return {
-			user: null,
+			today: new Date(),
+			user: this.$route.params.id,
 			username: null,
 			moduleList: [],
-			alertList: [],
-			today: null,
+			taskList: [],
 			routes: [
 				{path: 'home', text: 'Home'},
 				{path: 'calendar', text: 'My Calendar'},
@@ -51,6 +54,9 @@ export default {
 	},
 	computed: {
 		timetable: function() {
+			// Parses lessons from moduleList in a rendering friendly format
+			let days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+			let today = this.today.getDay();
 			let lessons = [];
 			this.moduleList.forEach(mod => {
 				mod.semesterData
@@ -58,6 +64,8 @@ export default {
 					.forEach(sem => {
 						sem.timetable.forEach(cls => {
 							lessons.push({
+								countdown: (days.indexOf(cls.day) - today + 7) % 7,
+								alertText: mod.moduleCode+' '+cls.lessonType,
 								moduleCode: mod.moduleCode,
 								title: mod.title,
 								...cls,
@@ -66,49 +74,44 @@ export default {
 					});
 				});
 			return lessons;
+		},
+		tasks: function() {
+			return this.taskList.map(task => {
+				return {
+					countdown: Math.floor((new Date(task.deadline) - this.today) / (1000*60*60*24)),
+					alertText: task.moduleCode+' '+task.taskName+' deadline',
+					...task,
+				}
+			})
+		},
+		alerts: function() {
+			// Sorts user's lessons and assignments by countdown
+			return [...this.timetable, ...this.tasks].sort((alert1, alert2) => alert1.countdown - alert2.countdown);
 		}
 	},
-	// methods: {
-	// 	getUsername() {
-	// 		db.collection("user").doc(this.user).get().then((doc)=>{
-	// 			this.username = doc.data().username;
-	// 		})
-	// 		return this.username;
-	// 	}
-	// },
-	mounted: function() {
-		db.collection('user').doc(this.$route.params.id).get()
-			.then(doc => {
-				this.user = this.$route.params.id;
+	methods: {
+		docToData(doc) {
+			// Reads component data from a firebase document
+			if (doc.exists) {
 				this.username = doc.data().username;
 				this.moduleList = doc.data().modules;
-				this.alertList = doc.data().alerts;
-				this.today = new Date();
-				console.log(this.today);
-				console.log(this.user);
-				console.log(this.username);
-				console.log(this.moduleList);
-			})
-		
-		// db.collection('users').doc(this.$route.params.id)
-		// 	.onSnapshot(doc => {
-		// 		let data = doc.data();
-		// 		this.user = this.$route.params.id;
-		// 		this.username = data.username;
-		// 		this.moduleList = data.modules;
-		// 		console.log('Listener caught updates:')
-		// 		console.log(this.user);
-		// 		console.log(this.username);
-		// 		console.log(this.moduleList);
-		// 	})				
+				this.taskList = doc.data().tasks;
+				// console.log(this.username);
+				// console.log(this.moduleList);
+				// console.log(this.taskList);
+			} else {
+				console.log('Error loading user data for '+this.user);
+			}
+		}
+	},
+	mounted: function() {
+		// Initialize data from firebase and set up a listener to update upon changes
+		db.collection('user').doc(this.user).get().then(this.docToData)
+		db.collection('user').doc(this.user).onSnapshot(this.docToData)
 		return
 	},
 }
 </script>
 
 <style lang="css" scoped>
-li {
-	padding-right: 10px;
-	margin: 10px 0;
-}
 </style>

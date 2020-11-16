@@ -1,25 +1,43 @@
 <template>
 	<div id='modules'>
-		<div class="row">
-			<div class="col-sm-9 col-md-7 col-lg-5 	mx-auto">
-			
-				<h1>My Modules {{ username }}</h1>
-				
-				<form v-on:submit.prevent="addModule(moduleCode)">
-					<input type="text" id="module" class="form-control" v-model="moduleCode">
-					<br>
-					<button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Add Module</button>
-				</form>
-
-				<ul class="list-group list-group-flush">
-					<li class="list-group-item" v-for="module in moduleList" :key="module.moduleCode">
-						<span>{{ module.moduleCode }} - {{ module.title }}</span>
-						<button class="btn btn-primary" v-on:click="removeModule(module.moduleCode)">Remove</button>
-					</li>
-				</ul>
-			
-			</div>
-		</div>
+		<h1>My Modules</h1>
+		<form class="row mb-3" v-on:submit.prevent="addModule(moduleCode)">
+			<table class="table">
+				<thead class="thead-light">
+					<tr>
+						<th scope="col">Module Code</th>
+						<th scope="col">Module Title</th>
+						<th scope="col">Module Title</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr v-for="mod in moduleList" :key="mod.moduleCode">
+						<td>{{ mod.moduleCode }}</td>
+						<td>{{ mod.title }}</td>
+						<td>
+							<button 
+								class="btn btn-primary btn-block"
+								type="button"
+								v-on:click="removeModule(mod.moduleCode)"
+							>Remove</button>
+						</td>
+					</tr>
+					<tr>
+						<td colspan=2>
+							<input 
+								class="form-control" 
+								type="text" 
+								v-model.trim="moduleCode" 
+								:placeholder="modulePrompt" 
+								required>
+						</td>
+						<td>		
+							<button class="btn btn-primary btn-block" type="submit">Add Module</button>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</form>
 	</div>
 </template>
 
@@ -33,6 +51,7 @@ export default {
 	components: {},
 	data: function() {
 		return {
+			modulePrompt: "Module code",
 			moduleCode: null,
 		}
 	},
@@ -40,14 +59,12 @@ export default {
 		addModule(moduleCode) {
 			moduleCode = moduleCode.toUpperCase();
 			if (this.moduleList.some(entry => entry.moduleCode == moduleCode)) {
-				alert(moduleCode+' already added!');
-				this.moduleCode = null;
+				this.modulePrompt = 'Module code ('+moduleCode+' already added!)' 
 			} else {
-				let url = 'https://api.nusmods.com/v2/2019-2020/modules/'+moduleCode+'.json'
+				let url = 'https://api.nusmods.com/v2/2020-2021/modules/'+moduleCode+'.json'
 				request.get(url, { json: true }, (err, res, body) => {
 					if (res.statusCode != 200) {
-						alert(moduleCode+' is not a module!');
-						this.moduleCode = null;
+						this.modulePrompt = 'Module code ('+moduleCode+' is not a module!)'
 					} else {
 						this.moduleList.push(body);
 						db.collection('user').doc(this.user).update({modules: this.moduleList});
@@ -61,11 +78,11 @@ export default {
 							})
 							db.collection('user').doc(this.user).update({modules: this.alertList});
 						}
-						alert('Added '+moduleCode+'!');
-						this.moduleCode = null;
+						this.modulePrompt = 'Module code'
 					}
 				});
 			}
+			this.moduleCode = null;
 			return
 		},
 		removeModule(moduleCode) {
