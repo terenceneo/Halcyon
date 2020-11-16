@@ -14,7 +14,7 @@
 
 			<div class="agenda">
 				<div class="table-responsive">
-					<table class="table">
+					<table class="table table-condensed table-bordered">
 						<thead class="thead-light">
 							<tr>
 								<th scope="col">Date</th>
